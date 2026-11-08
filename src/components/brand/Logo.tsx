@@ -21,7 +21,11 @@ export function LogoMark({ className }: { className?: string }) {
 
 export function Logo({ to = "/", className }: { to?: "/" | "/home"; className?: string }) {
   return (
-    <Link to={to} className={cn("flex items-center gap-2.5", className)} aria-label="LingoBridge AI home">
+    <Link
+      to={to}
+      className={cn("flex items-center gap-2.5", className)}
+      aria-label="LingoBridge AI home"
+    >
       <LogoMark />
       <span className="font-display text-[1.2rem] font-medium tracking-tight">
         LingoBridge <span className="text-teal">AI</span>

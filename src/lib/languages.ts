@@ -10,7 +10,10 @@ export const NATIVE_LANGUAGES = [
 ] as const;
 
 export type NativeLanguageId = (typeof NATIVE_LANGUAGES)[number]["id"];
-export const NATIVE_LANGUAGE_IDS = NATIVE_LANGUAGES.map((l) => l.id) as [NativeLanguageId, ...NativeLanguageId[]];
+export const NATIVE_LANGUAGE_IDS = NATIVE_LANGUAGES.map((l) => l.id) as [
+  NativeLanguageId,
+  ...NativeLanguageId[],
+];
 
 /** Target languages. Only `available` ones can be selected today; the rest are on the roadmap. */
 export const TARGET_LANGUAGES = [
@@ -27,9 +30,24 @@ export const AVAILABLE_TARGET_IDS = ["english"] as const;
 export type AvailableTargetId = (typeof AVAILABLE_TARGET_IDS)[number];
 
 export const LEVELS = [
-  { id: "beginner", name: "Beginner", cefr: "A1–A2", blurb: "I know basic words and short phrases." },
-  { id: "intermediate", name: "Intermediate", cefr: "B1–B2", blurb: "I can talk about everyday topics with some mistakes." },
-  { id: "advanced", name: "Advanced", cefr: "C1–C2", blurb: "I speak comfortably and want to sound more natural." },
+  {
+    id: "beginner",
+    name: "Beginner",
+    cefr: "A1–A2",
+    blurb: "I know basic words and short phrases.",
+  },
+  {
+    id: "intermediate",
+    name: "Intermediate",
+    cefr: "B1–B2",
+    blurb: "I can talk about everyday topics with some mistakes.",
+  },
+  {
+    id: "advanced",
+    name: "Advanced",
+    cefr: "C1–C2",
+    blurb: "I speak comfortably and want to sound more natural.",
+  },
 ] as const;
 export type LevelId = (typeof LEVELS)[number]["id"];
 export const LEVEL_IDS = LEVELS.map((l) => l.id) as [LevelId, ...LevelId[]];

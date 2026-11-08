@@ -5,7 +5,11 @@
  */
 export type CaptionRow = { id: number; role: "learner" | "tutor"; text: string };
 
-export function appendCaption(rows: CaptionRow[], role: CaptionRow["role"], delta: string): CaptionRow[] {
+export function appendCaption(
+  rows: CaptionRow[],
+  role: CaptionRow["role"],
+  delta: string,
+): CaptionRow[] {
   if (!delta) return rows;
   const last = rows[rows.length - 1];
   if (last && last.role === role) {

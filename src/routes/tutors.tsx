@@ -12,9 +12,17 @@ export const Route = createFileRoute("/tutors")({
   head: () => ({
     meta: [
       { title: "Choose your tutor — LingoBridge AI" },
-      { name: "description", content: "Meet five AI English tutors, each with their own voice, accent and teaching style." },
+      {
+        name: "description",
+        content:
+          "Meet five AI English tutors, each with their own voice, accent and teaching style.",
+      },
       { property: "og:title", content: "Meet the LingoBridge AI tutors" },
-      { property: "og:description", content: "Friendly, professional, patient, casual or interview-focused — pick the tutor that suits you." },
+      {
+        property: "og:description",
+        content:
+          "Friendly, professional, patient, casual or interview-focused — pick the tutor that suits you.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -65,23 +73,35 @@ function TutorsPage() {
                         {tutor.accent} accent
                       </span>
                     </div>
-                    <p className="text-sm font-medium text-teal">{tutor.role} · {tutor.style}</p>
+                    <p className="text-sm font-medium text-teal">
+                      {tutor.role} · {tutor.style}
+                    </p>
                     <p className="mt-3 leading-relaxed text-muted-foreground">{tutor.summary}</p>
                     <div className="mt-4 flex flex-wrap gap-1.5">
                       {tutor.bestFor.map((b) => (
-                        <span key={b} className="rounded-full border bg-secondary px-2.5 py-0.5 text-xs">
+                        <span
+                          key={b}
+                          className="rounded-full border bg-secondary px-2.5 py-0.5 text-xs"
+                        >
                           {b}
                         </span>
                       ))}
                     </div>
                     <div className="mt-6 flex gap-2 pt-2 md:mt-auto">
                       <Button asChild variant="accent">
-                        <Link to="/session/$tutorId" params={{ tutorId: tutor.id }} search={{ scenario: "free" }}>
+                        <Link
+                          to="/session/$tutorId"
+                          params={{ tutorId: tutor.id }}
+                          search={{ scenario: "free" }}
+                        >
                           <Phone /> Start a session
                         </Link>
                       </Button>
                       {!isDefault ? (
-                        <Button variant="outline" onClick={() => updateProfile({ tutorId: tutor.id })}>
+                        <Button
+                          variant="outline"
+                          onClick={() => updateProfile({ tutorId: tutor.id })}
+                        >
                           Make default
                         </Button>
                       ) : null}

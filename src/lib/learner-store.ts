@@ -159,7 +159,10 @@ export function recurringMistakes(mistakes: MistakeRecord[], limit = 5): Recurri
 }
 
 /** Consecutive calendar days (local time) with at least one session, ending today or yesterday. */
-export function practiceStreak(sessions: Pick<SessionRecord, "startedAt">[], now = new Date()): number {
+export function practiceStreak(
+  sessions: Pick<SessionRecord, "startedAt">[],
+  now = new Date(),
+): number {
   const days = new Set(sessions.map((s) => dayKey(new Date(s.startedAt))));
   const cursor = new Date(now);
   if (!days.has(dayKey(cursor))) cursor.setDate(cursor.getDate() - 1);

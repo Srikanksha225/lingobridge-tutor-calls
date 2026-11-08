@@ -56,7 +56,11 @@ export function AppShell({
           <div className="ml-auto flex items-center gap-3">
             {profile && tutor ? (
               <Button asChild size="sm" variant="accent">
-                <Link to="/session/$tutorId" params={{ tutorId: tutor.id }} search={{ scenario: "free" }}>
+                <Link
+                  to="/session/$tutorId"
+                  params={{ tutorId: tutor.id }}
+                  search={{ scenario: "free" }}
+                >
                   <img
                     src={TUTOR_PORTRAITS[tutor.id]}
                     alt=""
@@ -121,7 +125,9 @@ export function PageHeading({
         <h1 className="font-display text-3xl font-medium tracking-tight md:text-[2.5rem] md:leading-[1.1]">
           {title}
         </h1>
-        {description ? <p className="mt-3 text-[0.95rem] leading-relaxed text-muted-foreground">{description}</p> : null}
+        {description ? (
+          <p className="mt-3 text-[0.95rem] leading-relaxed text-muted-foreground">{description}</p>
+        ) : null}
       </div>
       {action}
     </div>

@@ -8,7 +8,11 @@ export const PLACEMENT_QUESTIONS: PlacementQuestion[] = [
     options: ["is the station", "the station is", "does the station"],
     answer: 1,
   },
-  { prompt: "If I ___ more time, I would learn to play the guitar.", options: ["had", "have", "will have"], answer: 0 },
+  {
+    prompt: "If I ___ more time, I would learn to play the guitar.",
+    options: ["had", "have", "will have"],
+    answer: 0,
+  },
   {
     prompt: "By the time we arrived, the film ___.",
     options: ["already starts", "has already start", "had already started"],

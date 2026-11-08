@@ -35,7 +35,12 @@ import {
   type MistakeRecord,
 } from "@/lib/learner-store";
 import { getScenario, SCENARIO_IDS, type ScenarioId } from "@/lib/scenarios";
-import { appendCaption, completedLearnerRows, previousTutorLine, type CaptionRow } from "@/lib/transcript";
+import {
+  appendCaption,
+  completedLearnerRows,
+  previousTutorLine,
+  type CaptionRow,
+} from "@/lib/transcript";
 import { TUTOR_PORTRAITS } from "@/lib/tutor-media";
 import { getTutor, type Tutor } from "@/lib/tutors";
 import { cn } from "@/lib/utils";
@@ -57,9 +62,15 @@ export const Route = createFileRoute("/session/$tutorId")({
     return {
       meta: [
         { title: `Speaking session with ${name} — LingoBridge AI` },
-        { name: "description", content: `Have a live English voice conversation with ${name}, with captions and instant feedback.` },
+        {
+          name: "description",
+          content: `Have a live English voice conversation with ${name}, with captions and instant feedback.`,
+        },
         { property: "og:title", content: `Talk with ${name} on LingoBridge AI` },
-        { property: "og:description", content: "Live English voice practice with captions and corrections in your language." },
+        {
+          property: "og:description",
+          content: "Live English voice practice with captions and corrections in your language.",
+        },
         { property: "og:type", content: "website" },
         { name: "twitter:card", content: "summary" },
       ],
@@ -158,7 +169,9 @@ function CallRoom({
           },
         });
         if (!res.ok) {
-          setFeedbackBoth((prev) => prev.map((f) => (f.rowId === row.id ? { ...f, status: "error", error: res.error } : f)));
+          setFeedbackBoth((prev) =>
+            prev.map((f) => (f.rowId === row.id ? { ...f, status: "error", error: res.error } : f)),
+          );
           return;
         }
         setFeedbackBoth((prev) =>
@@ -175,7 +188,9 @@ function CallRoom({
         );
       } catch {
         setFeedbackBoth((prev) =>
-          prev.map((f) => (f.rowId === row.id ? { ...f, status: "error", error: "Feedback could not load." } : f)),
+          prev.map((f) =>
+            f.rowId === row.id ? { ...f, status: "error", error: "Feedback could not load." } : f,
+          ),
         );
       }
     },
@@ -185,7 +200,10 @@ function CallRoom({
   const onEvent = useCallback(
     (event: LiveEvent) => {
       const delta = typeof event["delta"] === "string" ? event["delta"] : "";
-      if (event.type === "session.input_transcript.delta" || event.type === "session.output_transcript.delta") {
+      if (
+        event.type === "session.input_transcript.delta" ||
+        event.type === "session.output_transcript.delta"
+      ) {
         const role = event.type === "session.input_transcript.delta" ? "learner" : "tutor";
         rowsRef.current = appendCaption(rowsRef.current, role, delta);
         setRows(rowsRef.current);
@@ -246,7 +264,9 @@ function CallRoom({
       tutorId: tutor.id,
       scenarioId,
       startedAt: (startedAt.current ?? new Date()).toISOString(),
-      durationSec: startedAt.current ? Math.round((Date.now() - startedAt.current.getTime()) / 1000) : 0,
+      durationSec: startedAt.current
+        ? Math.round((Date.now() - startedAt.current.getTime()) / 1000)
+        : 0,
       learnerTurns: learnerTurns.length,
       transcript: all.map((r) => ({ role: r.role, text: r.text.trim() })).filter((r) => r.text),
     };
@@ -301,7 +321,9 @@ function CallRoom({
   }
 
   const retryRecap = () => {
-    const transcript = rowsRef.current.map((r) => ({ role: r.role, text: r.text.trim() })).filter((r) => r.text);
+    const transcript = rowsRef.current
+      .map((r) => ({ role: r.role, text: r.text.trim() }))
+      .filter((r) => r.text);
     const corrections = feedbackRef.current.flatMap((f) => f.feedback?.corrections ?? []);
     void loadRecap(transcript, corrections, (r) =>
       saveSession({
@@ -313,7 +335,9 @@ function CallRoom({
         learnerTurns: transcript.filter((t) => t.role === "learner").length,
         corrections: corrections.length,
         transcript,
-        feedback: feedbackRef.current.filter((f) => f.feedback).map((f) => ({ text: f.said, feedback: f.feedback! })),
+        feedback: feedbackRef.current
+          .filter((f) => f.feedback)
+          .map((f) => ({ text: f.said, feedback: f.feedback! })),
         recap: r,
       }),
     );
@@ -361,7 +385,11 @@ function CallRoom({
         </div>
         <div className="ml-auto flex items-center gap-3 text-xs">
           <StatusPill status={voice.status} />
-          {connected || elapsed > 0 ? <span className="font-mono tabular-nums text-stage-foreground/70">{formatTime(elapsed)}</span> : null}
+          {connected || elapsed > 0 ? (
+            <span className="font-mono tabular-nums text-stage-foreground/70">
+              {formatTime(elapsed)}
+            </span>
+          ) : null}
         </div>
       </header>
 
@@ -383,12 +411,20 @@ function CallRoom({
                     : `${scenario.description} Your browser will ask to use your microphone.`}
                 </p>
                 {voice.error ? (
-                  <p role="alert" className="mt-4 rounded-lg bg-destructive/20 px-3 py-2 text-sm text-stage-foreground">
+                  <p
+                    role="alert"
+                    className="mt-4 rounded-lg bg-destructive/20 px-3 py-2 text-sm text-stage-foreground"
+                  >
                     {voice.error}
                   </p>
                 ) : null}
                 <div className="mt-6 flex flex-wrap justify-center gap-3">
-                  <Button size="xl" variant="accent" onClick={startCall} disabled={voice.status === "stopping"}>
+                  <Button
+                    size="xl"
+                    variant="accent"
+                    onClick={startCall}
+                    disabled={voice.status === "stopping"}
+                  >
                     {voice.status === "stopping" ? <Loader2 className="animate-spin" /> : <Phone />}
                     {hasConversation || voice.error ? "Start a new call" : "Start call"}
                   </Button>
@@ -421,7 +457,13 @@ function CallRoom({
           {/* Self view */}
           <div className="absolute right-3 top-3 aspect-video w-32 overflow-hidden rounded-xl border border-stage-foreground/15 bg-stage shadow-lift sm:w-44">
             {camera.on ? (
-              <video ref={camera.videoRef} autoPlay playsInline muted className="h-full w-full -scale-x-100 object-cover" />
+              <video
+                ref={camera.videoRef}
+                autoPlay
+                playsInline
+                muted
+                className="h-full w-full -scale-x-100 object-cover"
+              />
             ) : (
               <div className="flex h-full flex-col items-center justify-center gap-1 text-stage-foreground/60">
                 <span className="flex size-9 items-center justify-center rounded-full bg-stage-foreground/10 text-sm font-medium text-stage-foreground">
@@ -439,7 +481,10 @@ function CallRoom({
 
           {/* Captions */}
           {captionsOn && inCall && captionRows.length ? (
-            <div className="pointer-events-none absolute inset-x-3 bottom-3 flex flex-col items-center gap-1.5 md:inset-x-10 md:bottom-5" aria-live="polite">
+            <div
+              className="pointer-events-none absolute inset-x-3 bottom-3 flex flex-col items-center gap-1.5 md:inset-x-10 md:bottom-5"
+              aria-live="polite"
+            >
               {captionRows.map((row) => (
                 <p
                   key={row.id}
@@ -459,7 +504,9 @@ function CallRoom({
 
           {greetingIssue && connected && !lastTutor ? (
             <div className="absolute inset-x-0 bottom-24 flex justify-center">
-              <span className="rounded-full bg-stage/80 px-4 py-2 text-sm backdrop-blur">{greetingIssue}</span>
+              <span className="rounded-full bg-stage/80 px-4 py-2 text-sm backdrop-blur">
+                {greetingIssue}
+              </span>
             </div>
           ) : null}
         </div>
@@ -477,20 +524,28 @@ function CallRoom({
                   panel === key && "bg-secondary font-medium text-foreground",
                 )}
               >
-                {key === "feedback" ? `Feedback${feedback.length ? ` (${feedback.length})` : ""}` : "Transcript"}
+                {key === "feedback"
+                  ? `Feedback${feedback.length ? ` (${feedback.length})` : ""}`
+                  : "Transcript"}
               </button>
             ))}
           </div>
           <div className="flex-1 overflow-y-auto p-4">
             {panel === "feedback" ? (
-              <FeedbackPanel items={feedback} nativeLabel={nativeName(profile.nativeLanguage)} thinking={thinking} tutorName={tutor.name} />
+              <FeedbackPanel
+                items={feedback}
+                nativeLabel={nativeName(profile.nativeLanguage)}
+                thinking={thinking}
+                tutorName={tutor.name}
+              />
             ) : (
               <TranscriptPanel rows={rows} tutorName={tutor.name} />
             )}
           </div>
           <div className="flex items-start gap-2 border-t px-4 py-3 text-xs text-muted-foreground">
             <Info className="mt-0.5 size-3.5 shrink-0" />
-            Pronunciation scoring isn't connected yet. Your recap includes pronunciation tips based on the words you used.
+            Pronunciation scoring isn't connected yet. Your recap includes pronunciation tips based
+            on the words you used.
           </div>
         </aside>
       </div>
@@ -528,14 +583,24 @@ function CallRoom({
           <PhoneOff className="size-4" /> <span className="hidden sm:inline">End session</span>
         </button>
       </div>
-      {camera.error ? <p className="pb-4 text-center text-xs text-stage-foreground/70">{camera.error}</p> : null}
+      {camera.error ? (
+        <p className="pb-4 text-center text-xs text-stage-foreground/70">{camera.error}</p>
+      ) : null}
     </div>
   );
 }
 
 /* ---------------- Stage ---------------- */
 
-function TutorStage({ tutor, speaking, connected }: { tutor: Tutor; speaking: boolean; connected: boolean }) {
+function TutorStage({
+  tutor,
+  speaking,
+  connected,
+}: {
+  tutor: Tutor;
+  speaking: boolean;
+  connected: boolean;
+}) {
   const avatar = getAvatarProvider();
   return (
     <div className="relative flex-1">
@@ -560,7 +625,9 @@ function TutorStage({ tutor, speaking, connected }: { tutor: Tutor; speaking: bo
             <span className="size-1.5 rounded-full bg-stage-foreground/50" />
           )}
           {tutor.name}
-          {connected ? <span className="text-stage-foreground/60">{speaking ? "speaking" : "listening"}</span> : null}
+          {connected ? (
+            <span className="text-stage-foreground/60">{speaking ? "speaking" : "listening"}</span>
+          ) : null}
         </span>
         {!avatar ? (
           <span
@@ -581,8 +648,13 @@ function SpeakingBars({ active }: { active: boolean }) {
       {[0, 1, 2].map((i) => (
         <span
           key={i}
-          className={cn("w-[3px] rounded-full bg-teal transition-all", active ? "animate-soft-pulse" : "h-1")}
-          style={active ? { height: `${[10, 12, 8][i]}px`, animationDelay: `${i * 140}ms` } : undefined}
+          className={cn(
+            "w-[3px] rounded-full bg-teal transition-all",
+            active ? "animate-soft-pulse" : "h-1",
+          )}
+          style={
+            active ? { height: `${[10, 12, 8][i]}px`, animationDelay: `${i * 140}ms` } : undefined
+          }
         />
       ))}
     </span>
@@ -662,12 +734,14 @@ function FeedbackPanel({
     <div className="space-y-3">
       {thinking ? (
         <p className="flex items-center gap-2 text-sm text-muted-foreground">
-          <span className="size-1.5 rounded-full bg-teal animate-soft-pulse" /> {tutorName} is looking that up…
+          <span className="size-1.5 rounded-full bg-teal animate-soft-pulse" /> {tutorName} is
+          looking that up…
         </p>
       ) : null}
       {items.length === 0 ? (
         <div className="rounded-xl border border-dashed p-6 text-center text-sm leading-relaxed text-muted-foreground">
-          As you talk, corrections and more natural ways to say things will appear here — explained in {nativeLabel}.
+          As you talk, corrections and more natural ways to say things will appear here — explained
+          in {nativeLabel}.
         </div>
       ) : null}
       {items.map((item) =>
@@ -759,8 +833,8 @@ function RecapScreen({
           <div>
             <p className="eyebrow">Session recap</p>
             <p className="mt-1 text-sm text-muted-foreground">
-              {scenarioTitle} with {tutor.name} · {formatTime(elapsed)} · {feedback.length} turns checked · {corrections}{" "}
-              correction{corrections === 1 ? "" : "s"}
+              {scenarioTitle} with {tutor.name} · {formatTime(elapsed)} · {feedback.length} turns
+              checked · {corrections} correction{corrections === 1 ? "" : "s"}
             </p>
           </div>
         </div>
@@ -776,7 +850,8 @@ function RecapScreen({
           ) : loading ? (
             <div className="space-y-6" aria-busy="true">
               <p className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Loader2 className="size-4 animate-spin" /> {tutor.name} is writing your recap in {nativeLabel}…
+                <Loader2 className="size-4 animate-spin" /> {tutor.name} is writing your recap in{" "}
+                {nativeLabel}…
               </p>
               <Skeleton className="h-9 w-2/3" />
               <Skeleton className="h-4 w-full" />
@@ -800,7 +875,9 @@ function RecapScreen({
 
         {feedback.some((f) => f.feedback && f.feedback.corrections.length) ? (
           <section className="mt-14">
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider">Corrections from this session</h3>
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider">
+              Corrections from this session
+            </h3>
             <div className="grid gap-3 md:grid-cols-2">
               {feedback
                 .filter((f) => f.feedback && f.feedback.corrections.length)
@@ -813,7 +890,12 @@ function RecapScreen({
 
         <div className="mt-14 flex flex-wrap gap-3 border-t pt-8">
           <Button asChild size="lg" variant="accent">
-            <Link to="/session/$tutorId" params={{ tutorId: tutor.id }} search={{ scenario: "free" }} reloadDocument>
+            <Link
+              to="/session/$tutorId"
+              params={{ tutorId: tutor.id }}
+              search={{ scenario: "free" }}
+              reloadDocument
+            >
               <Phone /> Talk again
             </Link>
           </Button>
@@ -841,7 +923,6 @@ function useAudioActivity(audioRef: React.RefObject<HTMLAudioElement | null>, en
     }
     let ctx: AudioContext | undefined;
     let raf = 0;
-    let poll: ReturnType<typeof setInterval> | undefined;
     let last = false;
     let quietSince = 0;
 
@@ -875,7 +956,7 @@ function useAudioActivity(audioRef: React.RefObject<HTMLAudioElement | null>, en
       }
     };
 
-    poll = setInterval(() => {
+    const poll = setInterval(() => {
       const stream = audioRef.current?.srcObject;
       if (stream instanceof MediaStream && stream.getAudioTracks().length) {
         clearInterval(poll);
@@ -911,7 +992,9 @@ function useCamera() {
     setPending(true);
     setError(null);
     try {
-      stream.current = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 360 } });
+      stream.current = await navigator.mediaDevices.getUserMedia({
+        video: { width: 640, height: 360 },
+      });
       setOn(true);
     } catch {
       setError("Camera unavailable. Check your browser's camera permission.");

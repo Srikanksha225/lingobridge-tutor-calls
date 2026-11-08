@@ -19,9 +19,17 @@ export const Route = createFileRoute("/practice")({
   head: () => ({
     meta: [
       { title: "Practice — LingoBridge AI" },
-      { name: "description", content: "Real-life speaking scenarios and an instant sentence coach that explains mistakes in your language." },
+      {
+        name: "description",
+        content:
+          "Real-life speaking scenarios and an instant sentence coach that explains mistakes in your language.",
+      },
       { property: "og:title", content: "Practise real-life English conversations" },
-      { property: "og:description", content: "Role-play cafés, meetings and interviews with an AI tutor, or check any sentence instantly." },
+      {
+        property: "og:description",
+        content:
+          "Role-play cafés, meetings and interviews with an AI tutor, or check any sentence instantly.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -54,10 +62,16 @@ function PracticePage() {
                     <span className="font-mono text-[0.68rem] uppercase tracking-wider text-muted-foreground">
                       {s.level} · {s.minutes} min
                     </span>
-                    <img src={TUTOR_PORTRAITS[tutor.id]} alt={tutor.name} className="size-8 rounded-full object-cover" />
+                    <img
+                      src={TUTOR_PORTRAITS[tutor.id]}
+                      alt={tutor.name}
+                      className="size-8 rounded-full object-cover"
+                    />
                   </div>
                   <h2 className="mt-6 font-display text-xl leading-tight">{s.title}</h2>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{s.description}</p>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+                    {s.description}
+                  </p>
                   <span className="mt-5 flex items-center gap-1.5 text-sm font-medium text-teal">
                     Start with {tutor.name}
                     <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
@@ -88,7 +102,12 @@ function SentenceCoach({ profile }: { profile: LearnerProfile }) {
     setError(null);
     try {
       const res = await analyze({
-        data: { text: said, tutorLine: null, nativeLanguage: profile.nativeLanguage, level: profile.level },
+        data: {
+          text: said,
+          tutorLine: null,
+          nativeLanguage: profile.nativeLanguage,
+          level: profile.level,
+        },
       });
       if (!res.ok) {
         setError(res.error);
@@ -119,10 +138,12 @@ function SentenceCoach({ profile }: { profile: LearnerProfile }) {
           <PenLine className="size-4" />
           <p className="eyebrow !text-teal">Sentence coach</p>
         </div>
-        <h2 className="font-display text-3xl font-medium tracking-tight">Not sure if it sounds right?</h2>
+        <h2 className="font-display text-3xl font-medium tracking-tight">
+          Not sure if it sounds right?
+        </h2>
         <p className="mt-2 text-muted-foreground">
-          Type something you want to say. You'll get corrections explained in {nativeName(profile.nativeLanguage)} and a
-          more natural way to say it.
+          Type something you want to say. You'll get corrections explained in{" "}
+          {nativeName(profile.nativeLanguage)} and a more natural way to say it.
         </p>
         <div className="mt-6 rounded-xl border bg-card p-3 shadow-card focus-within:ring-1 focus-within:ring-ring">
           <Textarea
@@ -141,14 +162,20 @@ function SentenceCoach({ profile }: { profile: LearnerProfile }) {
             aria-label="Sentence to check"
           />
           <div className="flex items-center justify-between px-2 pt-1">
-            <span className="text-xs text-muted-foreground">Enter to check · Shift+Enter for a new line</span>
+            <span className="text-xs text-muted-foreground">
+              Enter to check · Shift+Enter for a new line
+            </span>
             <Button onClick={() => void submit()} disabled={!text.trim() || loading}>
               {loading ? <Loader2 className="animate-spin" /> : null}
               {loading ? "Checking…" : "Check"}
             </Button>
           </div>
         </div>
-        {error ? <p className="mt-3 text-sm text-destructive" role="alert">{error}</p> : null}
+        {error ? (
+          <p className="mt-3 text-sm text-destructive" role="alert">
+            {error}
+          </p>
+        ) : null}
       </div>
 
       <div className="space-y-3">

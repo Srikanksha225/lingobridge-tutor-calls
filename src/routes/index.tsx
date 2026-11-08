@@ -29,7 +29,8 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "LingoBridge AI — Speak naturally. Learn confidently." },
       {
         property: "og:description",
-        content: "Real conversations with an AI English tutor, with corrections explained in your own language.",
+        content:
+          "Real conversations with an AI English tutor, with corrections explained in your own language.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -50,9 +51,15 @@ function Landing() {
       <header className="mx-auto flex h-18 max-w-6xl items-center justify-between px-5 py-4">
         <Logo />
         <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
-          <a href="#how" className="hover:text-foreground">How it works</a>
-          <a href="#tutors" className="hover:text-foreground">Tutors</a>
-          <a href="#memory" className="hover:text-foreground">Your progress</a>
+          <a href="#how" className="hover:text-foreground">
+            How it works
+          </a>
+          <a href="#tutors" className="hover:text-foreground">
+            Tutors
+          </a>
+          <a href="#memory" className="hover:text-foreground">
+            Your progress
+          </a>
         </nav>
         <Button asChild size="sm" variant={hasProfile ? "default" : "outline"}>
           <Link to={primary.to}>{hasProfile ? "Open app" : "Get started"}</Link>
@@ -71,9 +78,9 @@ function Landing() {
             <span className="text-teal">Learn confidently.</span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            Talk out loud with a patient AI tutor about real life — ordering coffee, a team meeting, a job
-            interview. Every mistake is explained in your own language, and your tutor remembers what to
-            practise next time.
+            Talk out loud with a patient AI tutor about real life — ordering coffee, a team meeting,
+            a job interview. Every mistake is explained in your own language, and your tutor
+            remembers what to practise next time.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Button asChild size="xl">
@@ -86,8 +93,12 @@ function Landing() {
             </Button>
           </div>
           <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
-            <span className="flex items-center gap-2"><Check className="size-4 text-teal" /> No account needed to start</span>
-            <span className="flex items-center gap-2"><Check className="size-4 text-teal" /> Explanations in 7 Indian languages</span>
+            <span className="flex items-center gap-2">
+              <Check className="size-4 text-teal" /> No account needed to start
+            </span>
+            <span className="flex items-center gap-2">
+              <Check className="size-4 text-teal" /> Explanations in 7 Indian languages
+            </span>
           </div>
         </div>
 
@@ -157,9 +168,9 @@ function Landing() {
               Grammar finally makes sense when it's explained in your language.
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-              Most apps explain English in English — which is exactly what you're still learning. LingoBridge
-              explains the "why" in Telugu, Tamil, Hindi, Kannada, Malayalam or Bengali, then shows you how a
-              fluent speaker would say it.
+              Most apps explain English in English — which is exactly what you're still learning.
+              LingoBridge explains the "why" in Telugu, Tamil, Hindi, Kannada, Malayalam or Bengali,
+              then shows you how a fluent speaker would say it.
             </p>
             <ul className="mt-8 space-y-3 text-[0.95rem]">
               {[
@@ -208,7 +219,10 @@ function Landing() {
         </div>
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
           {TUTORS.map((tutor) => (
-            <article key={tutor.id} className="group overflow-hidden rounded-xl border bg-card shadow-card">
+            <article
+              key={tutor.id}
+              className="group overflow-hidden rounded-xl border bg-card shadow-card"
+            >
               <div className="aspect-[4/5] overflow-hidden bg-muted">
                 <img
                   src={TUTOR_PORTRAITS[tutor.id]}
@@ -236,14 +250,32 @@ function Landing() {
         <div className="mx-auto grid max-w-6xl gap-10 px-5 py-24 md:grid-cols-3">
           <div className="md:col-span-1">
             <p className="eyebrow mb-3">Built to remember</p>
-            <h2 className="font-display text-4xl font-medium tracking-tight">A coach that knows you.</h2>
+            <h2 className="font-display text-4xl font-medium tracking-tight">
+              A coach that knows you.
+            </h2>
           </div>
           <div className="grid gap-8 sm:grid-cols-2 md:col-span-2">
             {[
-              { icon: Brain, title: "Learner memory", body: "Recurring mistakes are tracked and gently revisited in future sessions." },
-              { icon: Captions, title: "Live captions", body: "Follow every word with synchronized captions you can show or hide." },
-              { icon: BookOpenCheck, title: "Session recaps", body: "Pronunciation notes, vocabulary to review and targeted prompts after every call." },
-              { icon: AudioLines, title: "Adaptive difficulty", body: "Pace and vocabulary adjust to your level, from first words to fluent interviews." },
+              {
+                icon: Brain,
+                title: "Learner memory",
+                body: "Recurring mistakes are tracked and gently revisited in future sessions.",
+              },
+              {
+                icon: Captions,
+                title: "Live captions",
+                body: "Follow every word with synchronized captions you can show or hide.",
+              },
+              {
+                icon: BookOpenCheck,
+                title: "Session recaps",
+                body: "Pronunciation notes, vocabulary to review and targeted prompts after every call.",
+              },
+              {
+                icon: AudioLines,
+                title: "Adaptive difficulty",
+                body: "Pace and vocabulary adjust to your level, from first words to fluent interviews.",
+              },
             ].map((f) => (
               <div key={f.title}>
                 <f.icon className="mb-4 size-5 text-teal" />
@@ -306,8 +338,14 @@ function HeroCall() {
             Maya · Friendly tutor
           </div>
           <div className="absolute inset-x-4 bottom-4 rounded-lg bg-stage/75 px-4 py-3 text-[0.95rem] leading-snug text-stage-foreground backdrop-blur">
-            <span className="mr-2 font-mono text-[0.65rem] uppercase tracking-wider text-stage-foreground/60">Maya</span>
-            Nice! So you <span className="underline decoration-teal decoration-2 underline-offset-4">went to the office</span> yesterday — how was it?
+            <span className="mr-2 font-mono text-[0.65rem] uppercase tracking-wider text-stage-foreground/60">
+              Maya
+            </span>
+            Nice! So you{" "}
+            <span className="underline decoration-teal decoration-2 underline-offset-4">
+              went to the office
+            </span>{" "}
+            yesterday — how was it?
           </div>
         </div>
       </div>
@@ -315,7 +353,9 @@ function HeroCall() {
         <p className="eyebrow mb-2">Correction · Telugu</p>
         <p className="text-sm text-muted-foreground line-through">I am going to office yesterday</p>
         <p className="text-sm font-medium">I went to the office yesterday</p>
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">నిన్న జరిగిన పనికి past tense 'went' వాడండి.</p>
+        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+          నిన్న జరిగిన పనికి past tense 'went' వాడండి.
+        </p>
       </div>
     </div>
   );
@@ -330,10 +370,16 @@ function FeedbackSample(props: {
   offset?: boolean;
 }) {
   return (
-    <div className={`rounded-xl border bg-card p-5 shadow-card ${props.offset ? "md:ml-10" : "md:mr-10"}`}>
+    <div
+      className={`rounded-xl border bg-card p-5 shadow-card ${props.offset ? "md:ml-10" : "md:mr-10"}`}
+    >
       <div className="mb-3 flex items-center justify-between">
-        <span className="rounded-full border bg-secondary px-2 py-0.5 text-[0.7rem] font-medium">{props.category}</span>
-        <span className="font-mono text-[0.68rem] uppercase tracking-wider text-muted-foreground">Explained in {props.lang}</span>
+        <span className="rounded-full border bg-secondary px-2 py-0.5 text-[0.7rem] font-medium">
+          {props.category}
+        </span>
+        <span className="font-mono text-[0.68rem] uppercase tracking-wider text-muted-foreground">
+          Explained in {props.lang}
+        </span>
       </div>
       <p className="text-muted-foreground line-through decoration-destructive/50">{props.said}</p>
       <p className="mt-1 font-medium">{props.fix}</p>

@@ -14,9 +14,16 @@ export const Route = createFileRoute("/home")({
   head: () => ({
     meta: [
       { title: "Home — LingoBridge AI" },
-      { name: "description", content: "Pick up where you left off: start a conversation, review recurring mistakes and see suggested practice." },
+      {
+        name: "description",
+        content:
+          "Pick up where you left off: start a conversation, review recurring mistakes and see suggested practice.",
+      },
       { property: "og:title", content: "Your LingoBridge AI home" },
-      { property: "og:description", content: "Your personal English speaking plan, tutor and progress in one place." },
+      {
+        property: "og:description",
+        content: "Your personal English speaking plan, tutor and progress in one place.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -81,7 +88,11 @@ function HomePage() {
                 </p>
                 <div className="mt-7 flex flex-wrap gap-3">
                   <Button asChild size="xl" variant="accent">
-                    <Link to="/session/$tutorId" params={{ tutorId: tutor.id }} search={{ scenario: "free" }}>
+                    <Link
+                      to="/session/$tutorId"
+                      params={{ tutorId: tutor.id }}
+                      search={{ scenario: "free" }}
+                    >
                       <Phone /> Start talking
                     </Link>
                   </Button>
@@ -94,9 +105,24 @@ function HomePage() {
 
             {/* Stats */}
             <section className="grid gap-4 sm:grid-cols-3">
-              <Stat icon={Flame} label="Day streak" value={streak} hint={streak ? "Keep it going" : "Talk today to start one"} />
-              <Stat icon={Clock} label="Minutes spoken" value={minutes} hint={`${sessions.length} session${sessions.length === 1 ? "" : "s"}`} />
-              <Stat icon={MessageCircle} label="Corrections learned" value={mistakes.length} hint="Every one saved for review" />
+              <Stat
+                icon={Flame}
+                label="Day streak"
+                value={streak}
+                hint={streak ? "Keep it going" : "Talk today to start one"}
+              />
+              <Stat
+                icon={Clock}
+                label="Minutes spoken"
+                value={minutes}
+                hint={`${sessions.length} session${sessions.length === 1 ? "" : "s"}`}
+              />
+              <Stat
+                icon={MessageCircle}
+                label="Corrections learned"
+                value={mistakes.length}
+                hint="Every one saved for review"
+              />
             </section>
 
             <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
@@ -104,7 +130,10 @@ function HomePage() {
               <section>
                 <div className="mb-4 flex items-center justify-between">
                   <h2 className="text-lg font-semibold">Suggested for you</h2>
-                  <Link to="/practice" className="text-sm text-muted-foreground hover:text-foreground">
+                  <Link
+                    to="/practice"
+                    className="text-sm text-muted-foreground hover:text-foreground"
+                  >
                     All scenarios →
                   </Link>
                 </div>
@@ -119,14 +148,20 @@ function HomePage() {
                         search={{ scenario: s.id }}
                         className="group flex items-center gap-4 rounded-xl border bg-card p-4 transition-all hover:border-foreground/20 hover:shadow-card"
                       >
-                        <img src={TUTOR_PORTRAITS[st.id]} alt="" className="size-12 rounded-lg object-cover" />
+                        <img
+                          src={TUTOR_PORTRAITS[st.id]}
+                          alt=""
+                          className="size-12 rounded-lg object-cover"
+                        />
                         <div className="min-w-0 flex-1">
                           <p className="font-medium">{s.title}</p>
                           <p className="truncate text-sm text-muted-foreground">
                             {s.description} · with {st.name}
                           </p>
                         </div>
-                        <span className="hidden font-mono text-xs text-muted-foreground sm:block">{s.minutes} min</span>
+                        <span className="hidden font-mono text-xs text-muted-foreground sm:block">
+                          {s.minutes} min
+                        </span>
                         <ArrowRight className="size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
                       </Link>
                     );
@@ -140,24 +175,30 @@ function HomePage() {
                   <Sparkle className="size-4 text-teal" />
                   <h2 className="text-lg font-semibold">What {tutor.name} remembers</h2>
                 </div>
-                <p className="mb-5 text-sm text-muted-foreground">Patterns from your past conversations.</p>
+                <p className="mb-5 text-sm text-muted-foreground">
+                  Patterns from your past conversations.
+                </p>
                 {recurring.length ? (
                   <ul className="space-y-4">
                     {recurring.map((r) => (
                       <li key={r.category} className="border-t pt-4 first:border-t-0 first:pt-0">
                         <div className="flex items-center justify-between">
                           <CategoryLabel category={r.category} />
-                          <span className="font-mono text-xs text-muted-foreground">×{r.count}</span>
+                          <span className="font-mono text-xs text-muted-foreground">
+                            ×{r.count}
+                          </span>
                         </div>
-                        <p className="mt-2 text-sm text-muted-foreground line-through">{r.latest.original}</p>
+                        <p className="mt-2 text-sm text-muted-foreground line-through">
+                          {r.latest.original}
+                        </p>
                         <p className="text-sm font-medium">{r.latest.corrected}</p>
                       </li>
                     ))}
                   </ul>
                 ) : (
                   <div className="rounded-lg border border-dashed p-5 text-sm text-muted-foreground">
-                    Nothing yet. After a couple of conversations, mistakes you repeat will show up here — and your
-                    tutor will help you practise them.
+                    Nothing yet. After a couple of conversations, mistakes you repeat will show up
+                    here — and your tutor will help you practise them.
                   </div>
                 )}
                 {last ? (
@@ -165,7 +206,8 @@ function HomePage() {
                     to="/progress"
                     className="mt-6 block border-t pt-4 text-sm text-muted-foreground hover:text-foreground"
                   >
-                    Last session: {getScenario(last.scenarioId).title} with {getTutor(last.tutorId)?.name} →
+                    Last session: {getScenario(last.scenarioId).title} with{" "}
+                    {getTutor(last.tutorId)?.name} →
                   </Link>
                 ) : null}
               </section>
@@ -211,6 +253,7 @@ function suggestScenarios(goal: string, level: string) {
   };
   const ids = byGoal[goal] ?? ["introduce", "cafe", "free"];
   const ordered = ids.map((id) => SCENARIOS.find((s) => s.id === id)!).filter(Boolean);
-  if (level === "beginner") ordered.sort((a, b) => Number(b.level === "Beginner") - Number(a.level === "Beginner"));
+  if (level === "beginner")
+    ordered.sort((a, b) => Number(b.level === "Beginner") - Number(a.level === "Beginner"));
   return ordered;
 }

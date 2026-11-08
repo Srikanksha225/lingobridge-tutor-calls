@@ -66,7 +66,9 @@ export async function buildRecap(input: RecapInput) {
     .map((t) => `${t.role === "learner" ? "Learner" : "Tutor"}: ${t.text}`)
     .join("\n");
   const corrections = input.corrections.length
-    ? input.corrections.map((c) => `- [${c.category}] "${c.original}" → "${c.corrected}"`).join("\n")
+    ? input.corrections
+        .map((c) => `- [${c.category}] "${c.original}" → "${c.corrected}"`)
+        .join("\n")
     : "(none recorded)";
 
   return generateStructured<SessionRecap>({

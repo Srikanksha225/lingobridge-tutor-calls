@@ -81,7 +81,8 @@ export const TUTORS: Tutor[] = [
     name: "Priya",
     role: "Interview coach",
     style: "Interview preparation",
-    summary: "Direct and encouraging. Priya runs realistic mock interviews and sharpens your answers.",
+    summary:
+      "Direct and encouraging. Priya runs realistic mock interviews and sharpens your answers.",
     bestFor: ["Mock interviews", "Telling your story", "Confident answers"],
     accent: "Australian",
     voice: "quartz",

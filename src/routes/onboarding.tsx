@@ -25,9 +25,16 @@ export const Route = createFileRoute("/onboarding")({
   head: () => ({
     meta: [
       { title: "Get started — LingoBridge AI" },
-      { name: "description", content: "Choose your languages, take a two-minute level check and pick your AI English tutor." },
+      {
+        name: "description",
+        content:
+          "Choose your languages, take a two-minute level check and pick your AI English tutor.",
+      },
       { property: "og:title", content: "Get started with LingoBridge AI" },
-      { property: "og:description", content: "Set up your personal AI English speaking coach in two minutes." },
+      {
+        property: "og:description",
+        content: "Set up your personal AI English speaking coach in two minutes.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -87,7 +94,10 @@ function Onboarding() {
               {STEPS.slice(1).map((s, i) => (
                 <span
                   key={s}
-                  className={cn("h-1 w-6 rounded-full bg-border transition-colors", i < index && "bg-teal")}
+                  className={cn(
+                    "h-1 w-6 rounded-full bg-border transition-colors",
+                    i < index && "bg-teal",
+                  )}
                 />
               ))}
             </div>
@@ -109,21 +119,28 @@ function Onboarding() {
                   />
                 ))}
               </div>
-              <h1 className="font-display text-4xl font-medium tracking-tight md:text-5xl">Welcome to LingoBridge AI</h1>
+              <h1 className="font-display text-4xl font-medium tracking-tight md:text-5xl">
+                Welcome to LingoBridge AI
+              </h1>
               <p className="mx-auto mt-4 max-w-md text-lg leading-relaxed text-muted-foreground">
                 Your personal AI language coach is ready to help you speak confidently.
               </p>
               <Button size="xl" className="mt-10" onClick={() => go(1)}>
                 Let's get started <ArrowRight />
               </Button>
-              <p className="mt-4 text-sm text-muted-foreground">Takes about two minutes. No account needed.</p>
+              <p className="mt-4 text-sm text-muted-foreground">
+                Takes about two minutes. No account needed.
+              </p>
             </div>
           )}
 
           {step === "native" && <NativeStep value={native} onChange={setNative} />}
 
           {step === "target" && (
-            <StepFrame title="Which language do you want to learn?" hint="English is available now. More languages are on the way.">
+            <StepFrame
+              title="Which language do you want to learn?"
+              hint="English is available now. More languages are on the way."
+            >
               <div className="grid gap-3 sm:grid-cols-2">
                 {TARGET_LANGUAGES.map((lang) => (
                   <button
@@ -132,7 +149,9 @@ function Onboarding() {
                     disabled={!lang.available}
                     className={cn(
                       "flex items-center justify-between rounded-lg border bg-card p-4 text-left transition-all",
-                      lang.available ? "border-teal ring-1 ring-teal" : "cursor-not-allowed opacity-60",
+                      lang.available
+                        ? "border-teal ring-1 ring-teal"
+                        : "cursor-not-allowed opacity-60",
                     )}
                   >
                     <div>
@@ -155,7 +174,11 @@ function Onboarding() {
           {step === "placement" && (
             <StepFrame
               title={placementDone ? "Here's where you're starting" : "Quick level check"}
-              hint={placementDone ? "You can adjust this if it doesn't feel right." : "Five short questions. Guessing is fine — choose \"I'm not sure\" if you don't know."}
+              hint={
+                placementDone
+                  ? "You can adjust this if it doesn't feel right."
+                  : "Five short questions. Guessing is fine — choose \"I'm not sure\" if you don't know."
+              }
             >
               {!placementDone ? (
                 <PlacementQuestion
@@ -173,7 +196,8 @@ function Onboarding() {
                       {LEVELS.find((l) => l.id === placedLevel)?.name}
                     </p>
                     <p className="mt-1 text-muted-foreground">
-                      {correct} of {PLACEMENT_QUESTIONS.length} correct. Your tutor will adapt as you talk.
+                      {correct} of {PLACEMENT_QUESTIONS.length} correct. Your tutor will adapt as
+                      you talk.
                     </p>
                   </div>
                   <div className="grid gap-3">
@@ -204,10 +228,18 @@ function Onboarding() {
           )}
 
           {step === "goal" && (
-            <StepFrame title="What do you want to get better at?" hint="This shapes your conversations and suggested practice.">
+            <StepFrame
+              title="What do you want to get better at?"
+              hint="This shapes your conversations and suggested practice."
+            >
               <div className="grid gap-3 sm:grid-cols-2">
                 {GOALS.map((g) => (
-                  <OptionRow key={g.id} selected={goal === g.id} onClick={() => setGoal(g.id)} title={g.name} />
+                  <OptionRow
+                    key={g.id}
+                    selected={goal === g.id}
+                    onClick={() => setGoal(g.id)}
+                    title={g.name}
+                  />
                 ))}
               </div>
               <div className="mt-10 grid gap-8 sm:grid-cols-2">
@@ -222,7 +254,9 @@ function Onboarding() {
                   />
                 </label>
                 <div>
-                  <span className="text-sm font-medium">How confident do you feel speaking English?</span>
+                  <span className="text-sm font-medium">
+                    How confident do you feel speaking English?
+                  </span>
                   <Slider
                     className="mt-5"
                     min={1}
@@ -242,7 +276,10 @@ function Onboarding() {
           )}
 
           {step === "tutor" && (
-            <StepFrame title="Choose your tutor" hint="Each tutor has a different voice and teaching style. You can switch any time.">
+            <StepFrame
+              title="Choose your tutor"
+              hint="Each tutor has a different voice and teaching style. You can switch any time."
+            >
               <div className="grid gap-3">
                 {TUTORS.map((t) => (
                   <button
@@ -254,10 +291,15 @@ function Onboarding() {
                       tutorId === t.id && "border-teal ring-1 ring-teal",
                     )}
                   >
-                    <img src={TUTOR_PORTRAITS[t.id]} alt="" className="h-16 w-20 rounded-lg object-cover" />
+                    <img
+                      src={TUTOR_PORTRAITS[t.id]}
+                      alt=""
+                      className="h-16 w-20 rounded-lg object-cover"
+                    />
                     <div className="min-w-0 flex-1">
                       <p className="font-medium">
-                        {t.name} <span className="font-normal text-muted-foreground">· {t.role}</span>
+                        {t.name}{" "}
+                        <span className="font-normal text-muted-foreground">· {t.role}</span>
                       </p>
                       <p className="truncate text-sm text-muted-foreground">{t.summary}</p>
                     </div>
@@ -283,7 +325,9 @@ function Onboarding() {
                 size="lg"
                 onClick={() => go(1)}
                 disabled={
-                  (step === "native" && !native) || (step === "placement" && !placementDone) || (step === "goal" && !goal)
+                  (step === "native" && !native) ||
+                  (step === "placement" && !placementDone) ||
+                  (step === "goal" && !goal)
                 }
               >
                 Continue <ArrowRight />
@@ -296,7 +340,15 @@ function Onboarding() {
   );
 }
 
-function StepFrame({ title, hint, children }: { title: string; hint?: string; children: React.ReactNode }) {
+function StepFrame({
+  title,
+  hint,
+  children,
+}: {
+  title: string;
+  hint?: string;
+  children: React.ReactNode;
+}) {
   return (
     <div>
       <h1 className="font-display text-3xl font-medium tracking-tight md:text-4xl">{title}</h1>
@@ -343,16 +395,27 @@ function OptionRow({
   );
 }
 
-function NativeStep({ value, onChange }: { value: NativeLanguageId | null; onChange: (v: NativeLanguageId) => void }) {
+function NativeStep({
+  value,
+  onChange,
+}: {
+  value: NativeLanguageId | null;
+  onChange: (v: NativeLanguageId) => void;
+}) {
   const [query, setQuery] = useState("");
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return NATIVE_LANGUAGES;
-    return NATIVE_LANGUAGES.filter((l) => l.name.toLowerCase().includes(q) || l.native.toLowerCase().includes(q));
+    return NATIVE_LANGUAGES.filter(
+      (l) => l.name.toLowerCase().includes(q) || l.native.toLowerCase().includes(q),
+    );
   }, [query]);
 
   return (
-    <StepFrame title="What is your native language?" hint="We'll explain your mistakes in this language.">
+    <StepFrame
+      title="What is your native language?"
+      hint="We'll explain your mistakes in this language."
+    >
       <div className="relative mb-4">
         <Search className="absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
         <Input
@@ -376,7 +439,15 @@ function NativeStep({ value, onChange }: { value: NativeLanguageId | null; onCha
         ))}
         {results.length === 0 ? (
           <div className="col-span-full rounded-lg border border-dashed p-6 text-center text-sm text-muted-foreground">
-            No match for "{query}". Choose <button type="button" className="font-medium text-foreground underline" onClick={() => onChange("other")}>Other</button> and we'll explain in simple English.
+            No match for "{query}". Choose{" "}
+            <button
+              type="button"
+              className="font-medium text-foreground underline"
+              onClick={() => onChange("other")}
+            >
+              Other
+            </button>{" "}
+            and we'll explain in simple English.
           </div>
         ) : null}
       </div>
@@ -384,7 +455,13 @@ function NativeStep({ value, onChange }: { value: NativeLanguageId | null; onCha
   );
 }
 
-function PlacementQuestion({ index, onAnswer }: { index: number; onAnswer: (choice: number) => void }) {
+function PlacementQuestion({
+  index,
+  onAnswer,
+}: {
+  index: number;
+  onAnswer: (choice: number) => void;
+}) {
   const q = PLACEMENT_QUESTIONS[index]!;
   return (
     <div key={index} className="animate-rise">

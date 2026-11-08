@@ -40,7 +40,8 @@ export const SCENARIOS: Scenario[] = [
     level: "Beginner",
     minutes: 5,
     suggestedTutor: "clara",
-    prompt: "Help the learner introduce themselves: name, home town, family, work or studies, hobbies.",
+    prompt:
+      "Help the learner introduce themselves: name, home town, family, work or studies, hobbies.",
   },
   {
     id: "cafe",
@@ -49,7 +50,8 @@ export const SCENARIOS: Scenario[] = [
     level: "Beginner",
     minutes: 6,
     suggestedTutor: "maya",
-    prompt: "Role-play: you are a friendly café server and the learner is the customer ordering food and drinks.",
+    prompt:
+      "Role-play: you are a friendly café server and the learner is the customer ordering food and drinks.",
   },
   {
     id: "doctor",
@@ -67,7 +69,8 @@ export const SCENARIOS: Scenario[] = [
     level: "Intermediate",
     minutes: 8,
     suggestedTutor: "james",
-    prompt: "Role-play a short team stand-up meeting. Ask the learner for yesterday's progress, today's plan and any blockers.",
+    prompt:
+      "Role-play a short team stand-up meeting. Ask the learner for yesterday's progress, today's plan and any blockers.",
   },
   {
     id: "phone",
@@ -76,7 +79,8 @@ export const SCENARIOS: Scenario[] = [
     level: "Intermediate",
     minutes: 6,
     suggestedTutor: "james",
-    prompt: "Role-play a professional phone call where the learner needs to reschedule a meeting with you.",
+    prompt:
+      "Role-play a professional phone call where the learner needs to reschedule a meeting with you.",
   },
   {
     id: "interview",
@@ -85,7 +89,8 @@ export const SCENARIOS: Scenario[] = [
     level: "Advanced",
     minutes: 15,
     suggestedTutor: "priya",
-    prompt: "Run a mock job interview: tell me about yourself, strengths, a challenge you solved, why this role.",
+    prompt:
+      "Run a mock job interview: tell me about yourself, strengths, a challenge you solved, why this role.",
   },
   {
     id: "directions",
@@ -94,7 +99,8 @@ export const SCENARIOS: Scenario[] = [
     level: "Beginner",
     minutes: 5,
     suggestedTutor: "leo",
-    prompt: "Role-play: the learner is a tourist asking you, a local, for directions and recommendations.",
+    prompt:
+      "Role-play: the learner is a tourist asking you, a local, for directions and recommendations.",
   },
 ];
 

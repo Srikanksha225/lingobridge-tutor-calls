@@ -89,9 +89,15 @@ export function useLiveVoice(
             finalized: event.finalized === true,
           }));
         } else if (event.type === "app.playback.blocked" || event.type === "app.playback.resumed") {
-          setCall((previous) => ({ ...previous, playbackBlocked: event.type === "app.playback.blocked" }));
+          setCall((previous) => ({
+            ...previous,
+            playbackBlocked: event.type === "app.playback.blocked",
+          }));
         } else if (["app.error", "gateway.error", "error"].includes(event.type)) {
-          setCall((previous) => ({ ...previous, error: event.error?.message ?? "Voice request failed." }));
+          setCall((previous) => ({
+            ...previous,
+            error: event.error?.message ?? "Voice request failed.",
+          }));
         }
         try {
           void Promise.resolve(latest.current.onEvent?.(event)).catch((error) => {
@@ -204,9 +210,11 @@ function createLiveVoice(options: LiveOptions) {
     if ((state !== "starting" && state !== "active") || !options.audio.srcObject) return;
     try {
       await options.audio.play();
-      if (state === "starting" || state === "active") options.onEvent({ type: "app.playback.resumed" });
+      if (state === "starting" || state === "active")
+        options.onEvent({ type: "app.playback.resumed" });
     } catch {
-      if (state === "starting" || state === "active") options.onEvent({ type: "app.playback.blocked" });
+      if (state === "starting" || state === "active")
+        options.onEvent({ type: "app.playback.blocked" });
     }
   }
 
@@ -228,7 +236,10 @@ function createLiveVoice(options: LiveOptions) {
     };
     options.onEvent({
       type: "app.error",
-      error: { message: messages[reason ?? ""] ?? "The voice call ended unexpectedly. Start a new call to retry." },
+      error: {
+        message:
+          messages[reason ?? ""] ?? "The voice call ended unexpectedly. Start a new call to retry.",
+      },
     });
   }
 
@@ -326,7 +337,8 @@ function createLiveVoice(options: LiveOptions) {
         void resumePlayback();
       });
       connection.addEventListener("connectionstatechange", () => {
-        if (connection.connectionState === "failed") fail("Voice media connection failed. Start a new call to retry.");
+        if (connection.connectionState === "failed")
+          fail("Voice media connection failed. Start a new call to retry.");
         else if (connection.connectionState === "closed") fail("Voice media connection closed");
         else activate();
       });
@@ -390,7 +402,10 @@ function createLiveVoice(options: LiveOptions) {
       socket.onerror = () => fail("Voice connection failed");
       socket.onclose = () => {
         if (state !== "stopping" && state !== "closed") {
-          options.onEvent({ type: "app.error", error: { message: "Voice control connection closed" } });
+          options.onEvent({
+            type: "app.error",
+            error: { message: "Voice control connection closed" },
+          });
         }
         release();
       };

@@ -55,7 +55,11 @@ describe("explanation language", () => {
 describe("practice streak", () => {
   it("counts consecutive days ending today", () => {
     const now = new Date(2026, 10, 8, 12);
-    const sessions = [new Date(2026, 10, 8, 9), new Date(2026, 10, 7, 9), new Date(2026, 10, 5, 9)].map((d) => ({
+    const sessions = [
+      new Date(2026, 10, 8, 9),
+      new Date(2026, 10, 7, 9),
+      new Date(2026, 10, 5, 9),
+    ].map((d) => ({
       startedAt: d.toISOString(),
     }));
     expect(practiceStreak(sessions, now)).toBe(2);

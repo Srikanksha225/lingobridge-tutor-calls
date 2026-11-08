@@ -12,7 +12,8 @@ function gatewayError(error: unknown): string {
     error && typeof error === "object" && "statusCode" in error
       ? Number((error as { statusCode?: unknown }).statusCode)
       : undefined;
-  if (status === 402) return "AI credits have run out for this workspace. Add credits to keep getting feedback.";
+  if (status === 402)
+    return "AI credits have run out for this workspace. Add credits to keep getting feedback.";
   if (status === 429) return "The tutor is a little busy right now. Please try again in a moment.";
   if (status === 403) return "AI feedback isn't available for this workspace right now.";
   return "Feedback could not be generated. Please try again.";

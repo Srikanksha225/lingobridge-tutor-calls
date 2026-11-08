@@ -65,7 +65,9 @@ const connectGateway: LiveConnector = (address, headers, signal) =>
         } catch {
           message = "";
         }
-        reject(new Error(message || `Voice gateway rejected the connection (${response.statusCode})`));
+        reject(
+          new Error(message || `Voice gateway rejected the connection (${response.statusCode})`),
+        );
       };
       response.setEncoding("utf8");
       response.on("data", (chunk: string) => {
@@ -98,7 +100,9 @@ function upgradeRequest(request: IncomingMessage): Request {
 
 function rejectUpgrade(socket: Duplex, status: number) {
   if (!socket.destroyed) {
-    socket.end(`HTTP/1.1 ${status} Voice connection rejected\r\nConnection: close\r\nContent-Length: 0\r\n\r\n`);
+    socket.end(
+      `HTTP/1.1 ${status} Voice connection rejected\r\nConnection: close\r\nContent-Length: 0\r\n\r\n`,
+    );
   }
 }
 
@@ -123,7 +127,9 @@ export function liveVoiceDev(): Plugin {
               "/src/lib/live-relay.server.ts",
             )) as typeof import("./src/lib/live-relay.server");
             const config = relay.getLiveConfig();
-            const rejection = relay.validateLiveUpgrade(upgradeRequest(request), { allowMissingOrigin: true });
+            const rejection = relay.validateLiveUpgrade(upgradeRequest(request), {
+              allowMissingOrigin: true,
+            });
             if (rejection) return rejectUpgrade(socket, rejection.status);
             if (socket.destroyed) return;
             sockets.handleUpgrade(request, socket, head, (connection) => {

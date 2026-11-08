@@ -79,7 +79,17 @@ export function RecapView({ recap }: { recap: SessionRecap }) {
   );
 }
 
-function Section({ icon, title, note, children }: { icon: ReactNode; title: string; note?: string; children: ReactNode }) {
+function Section({
+  icon,
+  title,
+  note,
+  children,
+}: {
+  icon: ReactNode;
+  title: string;
+  note?: string;
+  children: ReactNode;
+}) {
   return (
     <section>
       <div className="mb-3 flex items-center gap-2 text-teal">
@@ -97,5 +107,9 @@ function Section({ icon, title, note, children }: { icon: ReactNode; title: stri
 }
 
 function Empty({ children }: { children: ReactNode }) {
-  return <div className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">{children}</div>;
+  return (
+    <div className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
+      {children}
+    </div>
+  );
 }

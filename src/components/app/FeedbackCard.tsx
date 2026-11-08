@@ -18,7 +18,9 @@ export function FeedbackCard({
   return (
     <div className={cn("rounded-xl border bg-card animate-rise", compact ? "p-4" : "p-5")}>
       <p className={cn("text-foreground/80", compact ? "text-sm" : "")}>
-        <span className="mr-1.5 font-mono text-[0.65rem] uppercase tracking-wider text-muted-foreground">You</span>
+        <span className="mr-1.5 font-mono text-[0.65rem] uppercase tracking-wider text-muted-foreground">
+          You
+        </span>
         "{said}"
       </p>
 
@@ -35,7 +37,9 @@ export function FeedbackCard({
                 <CategoryLabel category={c.category} />
               </div>
               <p className="text-sm">
-                <span className="text-muted-foreground line-through decoration-destructive/50">{c.original}</span>
+                <span className="text-muted-foreground line-through decoration-destructive/50">
+                  {c.original}
+                </span>
                 <span className="mx-1.5 text-muted-foreground">→</span>
                 <span className="font-medium">{c.corrected}</span>
               </p>
@@ -49,7 +53,9 @@ export function FeedbackCard({
         <div className="mt-3 flex items-start gap-2 rounded-lg bg-teal-soft px-3 py-2.5 text-sm">
           <Lightbulb className="mt-0.5 size-4 shrink-0 text-teal" />
           <div>
-            <p className="text-[0.7rem] font-medium uppercase tracking-wider text-accent-foreground">More natural</p>
+            <p className="text-[0.7rem] font-medium uppercase tracking-wider text-accent-foreground">
+              More natural
+            </p>
             <p className="text-foreground">{feedback.better_version}</p>
           </div>
         </div>
