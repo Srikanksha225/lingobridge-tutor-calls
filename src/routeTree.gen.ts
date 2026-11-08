@@ -15,6 +15,7 @@ import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as PracticeRouteImport } from './routes/practice'
 import { Route as ProgressRouteImport } from './routes/progress'
 import { Route as TutorsRouteImport } from './routes/tutors'
+import { Route as SessionTutorIdRouteImport } from './routes/session.$tutorId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +47,11 @@ const TutorsRoute = TutorsRouteImport.update({
   path: '/tutors',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SessionTutorIdRoute = SessionTutorIdRouteImport.update({
+  id: '/session/$tutorId',
+  path: '/session/$tutorId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/practice': typeof PracticeRoute
   '/progress': typeof ProgressRoute
   '/tutors': typeof TutorsRoute
+  '/session/$tutorId': typeof SessionTutorIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/practice': typeof PracticeRoute
   '/progress': typeof ProgressRoute
   '/tutors': typeof TutorsRoute
+  '/session/$tutorId': typeof SessionTutorIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,13 +79,27 @@ export interface FileRoutesById {
   '/practice': typeof PracticeRoute
   '/progress': typeof ProgressRoute
   '/tutors': typeof TutorsRoute
+  '/session/$tutorId': typeof SessionTutorIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/home' | '/onboarding' | '/practice' | '/progress' | '/tutors'
+    | '/'
+    | '/home'
+    | '/onboarding'
+    | '/practice'
+    | '/progress'
+    | '/tutors'
+    | '/session/$tutorId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/home' | '/onboarding' | '/practice' | '/progress' | '/tutors'
+  to:
+    | '/'
+    | '/home'
+    | '/onboarding'
+    | '/practice'
+    | '/progress'
+    | '/tutors'
+    | '/session/$tutorId'
   id:
     | '__root__'
     | '/'
@@ -86,6 +108,7 @@ export interface FileRouteTypes {
     | '/practice'
     | '/progress'
     | '/tutors'
+    | '/session/$tutorId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -95,6 +118,7 @@ export interface RootRouteChildren {
   PracticeRoute: typeof PracticeRoute
   ProgressRoute: typeof ProgressRoute
   TutorsRoute: typeof TutorsRoute
+  SessionTutorIdRoute: typeof SessionTutorIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -141,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TutorsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/session/$tutorId': {
+      id: '/session/$tutorId'
+      path: '/session/$tutorId'
+      fullPath: '/session/$tutorId'
+      preLoaderRoute: typeof SessionTutorIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -151,6 +182,7 @@ const rootRouteChildren: RootRouteChildren = {
   PracticeRoute: PracticeRoute,
   ProgressRoute: ProgressRoute,
   TutorsRoute: TutorsRoute,
+  SessionTutorIdRoute: SessionTutorIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
