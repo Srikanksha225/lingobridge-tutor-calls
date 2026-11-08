@@ -42,8 +42,8 @@ import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/session/$tutorId")({
   validateSearch: (search: Record<string, unknown>): { scenario: ScenarioId } => ({
-    scenario: (SCENARIO_IDS as readonly string[]).includes(String(search.scenario))
-      ? (search.scenario as ScenarioId)
+    scenario: (SCENARIO_IDS as readonly string[]).includes(String(search["scenario"]))
+      ? (search["scenario"] as ScenarioId)
       : "free",
   }),
   loader: ({ params }) => {
@@ -184,7 +184,7 @@ function CallRoom({
 
   const onEvent = useCallback(
     (event: LiveEvent) => {
-      const delta = typeof event.delta === "string" ? event.delta : "";
+      const delta = typeof event["delta"] === "string" ? event["delta"] : "";
       if (event.type === "session.input_transcript.delta" || event.type === "session.output_transcript.delta") {
         const role = event.type === "session.input_transcript.delta" ? "learner" : "tutor";
         rowsRef.current = appendCaption(rowsRef.current, role, delta);
@@ -597,7 +597,7 @@ function StatusPill({ status }: { status: string }) {
     stopping: { label: "Ending", dot: "bg-warning" },
     closed: { label: "Ended", dot: "bg-stage-foreground/40" },
   };
-  const s = map[status] ?? map.idle!;
+  const s = map[status] ?? map["idle"]!;
   return (
     <span className="flex items-center gap-1.5 rounded-full bg-stage-foreground/10 px-2.5 py-1">
       <span className={cn("size-1.5 rounded-full", s.dot)} />

@@ -46,7 +46,7 @@ export async function generateStructured<T>(options: {
       instructions: options.instructions,
       messages: options.messages,
       output: Output.object({ schema: options.schema }),
-      abortSignal: options.signal,
+      ...(options.signal ? { abortSignal: options.signal } : {}),
       maxRetries: 1,
       onError: ({ error }) => {
         streamError = error;
