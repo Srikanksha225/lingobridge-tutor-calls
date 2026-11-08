@@ -28,3 +28,11 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Learner data (profile, sessions, mistakes) goes through `src/lib/learner-store.ts` only; it is localStorage today so it can be swapped for a backend without touching pages.
+- Live voice calls use the persistent `/api/live` relay (`src/lib/live-relay.server.ts`, dev adapter `live-vite-plugin.ts`, dispatched from `src/server.ts`); session prompts are built server-side from enum-only `app.start` context so no learner free text reaches the voice prompt.
+- Tutor personas live in `src/lib/tutors.ts` (shared with the relay, no image imports); portraits live in `src/lib/tutor-media.ts`.
+- Text feedback and recaps use `generateStructured` in `src/lib/ai-gateway.server.ts` (streamed Responses + strict schema) behind server functions in `src/lib/feedback.functions.ts`.
+- Real-time video avatars plug in via `src/lib/avatar.ts`; until one is configured the UI must label the tutor as a photo in a voice call, never as live video.
