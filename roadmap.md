@@ -1,5 +1,6 @@
 # ENE roadmap
 
+- [x] Rename app to ENE
 - [x] Design system, fonts, brand (paper/ink/teal)
 - [x] Landing page
 - [x] Onboarding: welcome, native language (searchable), target language, placement check, goal, tutor
