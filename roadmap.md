@@ -1,4 +1,4 @@
-# LingoBridge AI roadmap
+# ENE roadmap
 
 - [x] Design system, fonts, brand (paper/ink/teal)
 - [x] Landing page

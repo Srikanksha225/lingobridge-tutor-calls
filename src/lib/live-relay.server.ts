@@ -170,7 +170,7 @@ function planSession(context: LiveStartContext): SessionPlan {
     : "";
 
   const instructions = `${tutor.persona}
-You are an English speaking tutor on LingoBridge, talking with the learner in a live voice call. Speak English with a ${tutor.accent} accent.
+You are an English speaking tutor on ENE, talking with the learner in a live voice call. Speak English with a ${tutor.accent} accent.
 Learner: ${level} level, goal: ${goalName(context.goal)}. Their native language is ${explain === "simple English" ? "not specified" : explain}.
 ${pace}
 Today's practice: ${scenario.title}. ${scenario.prompt}

@@ -61,12 +61,12 @@ export const Route = createFileRoute("/session/$tutorId")({
     const name = tutor?.name ?? "your tutor";
     return {
       meta: [
-        { title: `Speaking session with ${name} — LingoBridge AI` },
+        { title: `Speaking session with ${name} — ENE` },
         {
           name: "description",
           content: `Have a live English voice conversation with ${name}, with captions and instant feedback.`,
         },
-        { property: "og:title", content: `Talk with ${name} on LingoBridge AI` },
+        { property: "og:title", content: `Talk with ${name} on ENE` },
         {
           property: "og:description",
           content: "Live English voice practice with captions and corrections in your language.",

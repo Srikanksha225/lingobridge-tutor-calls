@@ -20,13 +20,13 @@ import { TUTORS } from "@/lib/tutors";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "LingoBridge AI — Speak English naturally with a friendly AI tutor" },
+      { title: "ENE — Speak English naturally with a friendly AI tutor" },
       {
         name: "description",
         content:
           "Have real voice conversations with an AI English tutor. Mistakes are explained in Telugu, Tamil, Hindi and more, and your tutor remembers what to work on.",
       },
-      { property: "og:title", content: "LingoBridge AI — Speak naturally. Learn confidently." },
+      { property: "og:title", content: "ENE — Speak naturally. Learn confidently." },
       {
         property: "og:description",
         content:
@@ -169,7 +169,7 @@ function Landing() {
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
               Most apps explain English in English — which is exactly what you're still learning.
-              LingoBridge explains the "why" in Telugu, Tamil, Hindi, Kannada, Malayalam or Bengali,
+              ENE explains the "why" in Telugu, Tamil, Hindi, Kannada, Malayalam or Bengali,
               then shows you how a fluent speaker would say it.
             </p>
             <ul className="mt-8 space-y-3 text-[0.95rem]">
@@ -310,7 +310,7 @@ function Landing() {
         <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-4 px-5 py-10 text-sm text-muted-foreground md:flex-row md:items-center">
           <div className="flex items-center gap-2.5">
             <LogoMark className="size-6" />
-            <span>LingoBridge AI — Speak naturally. Learn confidently.</span>
+            <span>ENE — Speak naturally. Learn confidently.</span>
           </div>
           <p className="flex items-center gap-2">
             <ShieldCheck className="size-4" /> Your practice history stays in this browser.
@@ -328,7 +328,7 @@ function HeroCall() {
         <div className="relative aspect-[4/3.4]">
           <img
             src={TUTOR_PORTRAITS.maya}
-            alt="Maya, a friendly LingoBridge tutor, in a video-call style frame"
+            alt="Maya, a friendly ENE tutor, in a video-call style frame"
             width={1280}
             height={720}
             className="h-full w-full object-cover"

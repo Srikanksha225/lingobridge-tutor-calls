@@ -17,12 +17,12 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/progress")({
   head: () => ({
     meta: [
-      { title: "Progress — LingoBridge AI" },
+      { title: "Progress — ENE" },
       {
         name: "description",
         content: "Your sessions, recaps and the mistakes you're working on, all in one place.",
       },
-      { property: "og:title", content: "Your LingoBridge AI progress" },
+      { property: "og:title", content: "Your ENE progress" },
       {
         property: "og:description",
         content: "Session recaps, recurring mistakes and vocabulary to review.",

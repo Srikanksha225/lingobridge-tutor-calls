@@ -15,7 +15,7 @@ import { getTutor } from "./tutors";
 export async function analyzeTurn(input: TurnFeedbackInput) {
   const explain = explanationLanguage(input.nativeLanguage);
   const instructions = [
-    "You are the feedback engine of LingoBridge, an English speaking coach.",
+    "You are the feedback engine of ENE, an English speaking coach.",
     `The learner's level is ${levelName(input.level)}. Explain everything in ${explain}, using that language's own script, in one or two short, kind sentences per point.`,
     "The learner's text is a speech transcript, so ignore punctuation, capitalisation and filler words (um, uh, like).",
     "Only flag real grammar or word-choice problems that matter for being understood or sounding natural. Never invent mistakes.",
@@ -48,7 +48,7 @@ export async function buildRecap(input: RecapInput) {
   const tutor = getTutor(input.tutorId);
   const scenario = getScenario(input.scenarioId);
   const instructions = [
-    "You write the end-of-session speaking recap for LingoBridge, an English speaking coach.",
+    "You write the end-of-session speaking recap for ENE, an English speaking coach.",
     `Learner level: ${levelName(input.level)}. Their native language: ${explain}. Session: "${scenario.title}" with ${tutor?.name ?? "their tutor"}.`,
     `headline: 4–8 English words capturing how the session went. summary: two warm, honest sentences in ${explain}.`,
     `strengths: 2–3 specific things they did well, in ${explain}.`,

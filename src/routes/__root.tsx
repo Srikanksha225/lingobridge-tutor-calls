@@ -82,14 +82,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "LingoBridge AI — Speak naturally. Learn confidently." },
+      { title: "ENE — Speak naturally. Learn confidently." },
       {
         name: "description",
         content:
           "Practise English by talking with a friendly AI tutor, with corrections explained in your own language.",
       },
-      { name: "author", content: "LingoBridge AI" },
-      { property: "og:title", content: "LingoBridge AI — Speak naturally. Learn confidently." },
+      { name: "author", content: "ENE" },
+      { property: "og:title", content: "ENE — Speak naturally. Learn confidently." },
       {
         property: "og:description",
         content:

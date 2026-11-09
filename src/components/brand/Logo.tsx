@@ -24,11 +24,11 @@ export function Logo({ to = "/", className }: { to?: "/" | "/home"; className?: 
     <Link
       to={to}
       className={cn("flex items-center gap-2.5", className)}
-      aria-label="LingoBridge AI home"
+      aria-label="ENE home"
     >
       <LogoMark />
       <span className="font-display text-[1.2rem] font-medium tracking-tight">
-        LingoBridge <span className="text-teal">AI</span>
+        ENE
       </span>
     </Link>
   );
