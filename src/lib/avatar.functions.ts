@@ -12,7 +12,7 @@ export type AvatarTokenResult =
 export const getAvatarSessionToken = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => z.object({ tutorId: z.enum(TUTOR_IDS) }).parse(data))
   .handler(async ({ data }): Promise<AvatarTokenResult> => {
-    const apiKey = process.env.SIMLI_API_KEY;
+    const apiKey = process.env["SIMLI_API_KEY"];
     const faceId = AVATAR_FACE_IDS[data.tutorId];
     if (!apiKey || !faceId) return { ok: false, reason: "not_configured" };
     try {

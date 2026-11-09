@@ -11,7 +11,7 @@ import { AVATAR_FACE_IDS } from "../src/lib/avatar-faces";
 import { TUTOR_IDS } from "../src/lib/tutors";
 
 const API = "https://api.simli.ai";
-const key = process.env.SIMLI_API_KEY;
+const key = process.env["SIMLI_API_KEY"];
 if (!key) throw new Error("SIMLI_API_KEY is not set");
 const root = join(import.meta.dir, "..");
 
