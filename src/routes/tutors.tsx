@@ -11,13 +11,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/tutors")({
   head: () => ({
     meta: [
-      { title: "Choose your tutor — LingoBridge AI" },
+      { title: "Choose your tutor — ENE" },
       {
         name: "description",
         content:
           "Meet five AI English tutors, each with their own voice, accent and teaching style.",
       },
-      { property: "og:title", content: "Meet the LingoBridge AI tutors" },
+      { property: "og:title", content: "Meet the ENE tutors" },
       {
         property: "og:description",
         content:

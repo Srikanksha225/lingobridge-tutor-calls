@@ -13,13 +13,13 @@ import { getTutor } from "@/lib/tutors";
 export const Route = createFileRoute("/home")({
   head: () => ({
     meta: [
-      { title: "Home — LingoBridge AI" },
+      { title: "Home — ENE" },
       {
         name: "description",
         content:
           "Pick up where you left off: start a conversation, review recurring mistakes and see suggested practice.",
       },
-      { property: "og:title", content: "Your LingoBridge AI home" },
+      { property: "og:title", content: "Your ENE home" },
       {
         property: "og:description",
         content: "Your personal English speaking plan, tutor and progress in one place.",

@@ -24,13 +24,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/onboarding")({
   head: () => ({
     meta: [
-      { title: "Get started — LingoBridge AI" },
+      { title: "Get started — ENE" },
       {
         name: "description",
         content:
           "Choose your languages, take a two-minute level check and pick your AI English tutor.",
       },
-      { property: "og:title", content: "Get started with LingoBridge AI" },
+      { property: "og:title", content: "Get started with ENE" },
       {
         property: "og:description",
         content: "Set up your personal AI English speaking coach in two minutes.",
@@ -120,7 +120,7 @@ function Onboarding() {
                 ))}
               </div>
               <h1 className="font-display text-4xl font-medium tracking-tight md:text-5xl">
-                Welcome to LingoBridge AI
+                Welcome to ENE
               </h1>
               <p className="mx-auto mt-4 max-w-md text-lg leading-relaxed text-muted-foreground">
                 Your personal AI language coach is ready to help you speak confidently.

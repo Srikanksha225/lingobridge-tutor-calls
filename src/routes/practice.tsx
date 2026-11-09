@@ -18,7 +18,7 @@ import { getTutor } from "@/lib/tutors";
 export const Route = createFileRoute("/practice")({
   head: () => ({
     meta: [
-      { title: "Practice — LingoBridge AI" },
+      { title: "Practice — ENE" },
       {
         name: "description",
         content:
