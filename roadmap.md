@@ -13,6 +13,6 @@
 - [x] Learner memory: recurring mistakes fed into next session
 - [x] Home dashboard, Practice (sentence coach + scenarios), Progress
 - [x] Head metadata per route, tests for rules
-- [ ] Real-time video avatar (Simli) — code built; blocked: needs SIMLI_API_KEY, then generate tutor faces
+- [ ] Real-time video avatar — code ready; blocked: Simli account has no Trinity-2 face generations left (needs plan renewal or purchase)
 - [ ] Acoustic pronunciation scoring — blocked: needs a speech-assessment provider
 - [ ] Remaining spec sections — blocked: uploaded spec was cut off after "Target language selection"
