@@ -1,5 +1,6 @@
 # ENE roadmap
 
+- [x] Rename app to ENE
 - [x] Design system, fonts, brand (paper/ink/teal)
 - [x] Landing page
 - [x] Onboarding: welcome, native language (searchable), target language, placement check, goal, tutor
@@ -12,6 +13,6 @@
 - [x] Learner memory: recurring mistakes fed into next session
 - [x] Home dashboard, Practice (sentence coach + scenarios), Progress
 - [x] Head metadata per route, tests for rules
-- [ ] Real-time video avatar — blocked: needs an avatar provider account/API key
+- [ ] Real-time video avatar (Simli) — code built; blocked: needs SIMLI_API_KEY, then generate tutor faces
 - [ ] Acoustic pronunciation scoring — blocked: needs a speech-assessment provider
 - [ ] Remaining spec sections — blocked: uploaded spec was cut off after "Target language selection"
