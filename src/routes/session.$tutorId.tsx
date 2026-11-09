@@ -22,7 +22,7 @@ import { RecapView } from "@/components/app/RecapView";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useLiveVoice, type LiveEvent } from "@/hooks/use-live-voice";
-import { getAvatarProvider } from "@/lib/avatar";
+import { useLiveAvatar } from "@/hooks/use-live-avatar";
 import type { SessionRecap, TurnFeedback } from "@/lib/feedback-schema";
 import { getSessionRecap, getTurnFeedback } from "@/lib/feedback.functions";
 import { nativeName } from "@/lib/languages";
@@ -235,7 +235,9 @@ function CallRoom({
     return () => clearInterval(t);
   }, [connected]);
 
-  const tutorSpeaking = useAudioActivity(voice.audioRef, connected);
+  const avatar = useLiveAvatar({ tutorId: tutor.id, active: inCall, voiceAudioRef: voice.audioRef });
+  const voiceSpeaking = useAudioActivity(voice.audioRef, connected);
+  const tutorSpeaking = avatar.state === "live" ? avatar.speaking : voiceSpeaking;
   const camera = useCamera();
 
   function startCall() {
@@ -396,7 +398,12 @@ function CallRoom({
       <div className="grid flex-1 gap-4 px-3 pb-3 md:px-6 lg:grid-cols-[1fr_380px]">
         {/* Stage */}
         <div className="relative flex min-h-[420px] flex-col overflow-hidden rounded-2xl bg-stage-foreground/5">
-          <TutorStage tutor={tutor} speaking={tutorSpeaking} connected={connected} />
+          <TutorStage
+            tutor={tutor}
+            speaking={tutorSpeaking}
+            connected={connected}
+            avatar={avatar}
+          />
 
           {/* Pre-call / error overlay */}
           {!inCall ? (
@@ -596,21 +603,48 @@ function TutorStage({
   tutor,
   speaking,
   connected,
+  avatar,
 }: {
   tutor: Tutor;
   speaking: boolean;
   connected: boolean;
+  avatar: ReturnType<typeof useLiveAvatar>;
 }) {
-  const avatar = getAvatarProvider();
+  const live = avatar.state === "live";
+  const label =
+    avatar.state === "live"
+      ? { text: "Live video avatar · AI-generated", title: `${tutor.name} is an AI tutor shown as a real-time, lip-synced video.` }
+      : avatar.state === "starting"
+        ? { text: "Starting live video…", title: "Connecting the tutor's real-time video avatar." }
+        : avatar.state === "failed"
+          ? { text: "Video unavailable · voice call with photo", title: "The live video avatar couldn't start, so the call continues with voice and the tutor's photo." }
+          : avatar.state === "unavailable"
+            ? { text: "Voice call · photo shown, live video avatar not connected", title: "This is a voice call with the tutor's photo. A real-time video avatar can be connected later." }
+            : null;
   return (
     <div className="relative flex-1">
       <img
         src={TUTOR_PORTRAITS[tutor.id]}
-        alt={`${tutor.name}, ${tutor.role}`}
+        alt={live ? "" : `${tutor.name}, ${tutor.role}`}
         width={1280}
         height={720}
         className="absolute inset-0 h-full w-full object-cover"
       />
+      {avatar.enabled ? (
+        <>
+          <video
+            ref={avatar.videoRef}
+            autoPlay
+            playsInline
+            aria-label={live ? `${tutor.name}, live video avatar` : undefined}
+            className={cn(
+              "absolute inset-0 h-full w-full bg-stage object-cover transition-opacity duration-500",
+              live ? "opacity-100" : "opacity-0",
+            )}
+          />
+          <audio ref={avatar.audioRef} autoPlay className="sr-only" aria-hidden />
+        </>
+      ) : null}
       <div
         className={cn(
           "pointer-events-none absolute inset-0 rounded-2xl ring-inset transition-all duration-200",
@@ -629,12 +663,12 @@ function TutorStage({
             <span className="text-stage-foreground/60">{speaking ? "speaking" : "listening"}</span>
           ) : null}
         </span>
-        {!avatar ? (
+        {label ? (
           <span
             className="rounded-full bg-stage/75 px-3 py-1 text-[0.68rem] text-stage-foreground/75 backdrop-blur"
-            title="This is a voice call with the tutor's photo. A real-time video avatar can be connected later."
+            title={label.title}
           >
-            Voice call · photo shown, live video avatar not connected
+            {label.text}
           </span>
         ) : null}
       </div>
