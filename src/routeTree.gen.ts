@@ -10,76 +10,83 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as HomeRouteImport } from './routes/home'
-import { Route as OnboardingRouteImport } from './routes/onboarding'
-import { Route as PracticeRouteImport } from './routes/practice'
-import { Route as ProgressRouteImport } from './routes/progress'
-import { Route as TutorsRouteImport } from './routes/tutors'
-import { Route as SessionTutorIdRouteImport } from './routes/session.$tutorId'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
+import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedPracticeRouteImport } from './routes/_authenticated/practice'
+import { Route as AuthenticatedProgressRouteImport } from './routes/_authenticated/progress'
+import { Route as AuthenticatedTutorsRouteImport } from './routes/_authenticated/tutors'
+import { Route as AuthenticatedSessionTutorIdRouteImport } from './routes/_authenticated/session.$tutorId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const HomeRoute = HomeRouteImport.update({
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
   id: '/home',
   path: '/home',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const OnboardingRoute = OnboardingRouteImport.update({
+const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const PracticeRoute = PracticeRouteImport.update({
+const AuthenticatedPracticeRoute = AuthenticatedPracticeRouteImport.update({
   id: '/practice',
   path: '/practice',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const ProgressRoute = ProgressRouteImport.update({
+const AuthenticatedProgressRoute = AuthenticatedProgressRouteImport.update({
   id: '/progress',
   path: '/progress',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const TutorsRoute = TutorsRouteImport.update({
+const AuthenticatedTutorsRoute = AuthenticatedTutorsRouteImport.update({
   id: '/tutors',
   path: '/tutors',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const SessionTutorIdRoute = SessionTutorIdRouteImport.update({
-  id: '/session/$tutorId',
-  path: '/session/$tutorId',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const AuthenticatedSessionTutorIdRoute =
+  AuthenticatedSessionTutorIdRouteImport.update({
+    id: '/session/$tutorId',
+    path: '/session/$tutorId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/home': typeof HomeRoute
-  '/onboarding': typeof OnboardingRoute
-  '/practice': typeof PracticeRoute
-  '/progress': typeof ProgressRoute
-  '/tutors': typeof TutorsRoute
-  '/session/$tutorId': typeof SessionTutorIdRoute
+  '/home': typeof AuthenticatedHomeRoute
+  '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/practice': typeof AuthenticatedPracticeRoute
+  '/progress': typeof AuthenticatedProgressRoute
+  '/tutors': typeof AuthenticatedTutorsRoute
+  '/session/$tutorId': typeof AuthenticatedSessionTutorIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/home': typeof HomeRoute
-  '/onboarding': typeof OnboardingRoute
-  '/practice': typeof PracticeRoute
-  '/progress': typeof ProgressRoute
-  '/tutors': typeof TutorsRoute
-  '/session/$tutorId': typeof SessionTutorIdRoute
+  '/home': typeof AuthenticatedHomeRoute
+  '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/practice': typeof AuthenticatedPracticeRoute
+  '/progress': typeof AuthenticatedProgressRoute
+  '/tutors': typeof AuthenticatedTutorsRoute
+  '/session/$tutorId': typeof AuthenticatedSessionTutorIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/home': typeof HomeRoute
-  '/onboarding': typeof OnboardingRoute
-  '/practice': typeof PracticeRoute
-  '/progress': typeof ProgressRoute
-  '/tutors': typeof TutorsRoute
-  '/session/$tutorId': typeof SessionTutorIdRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/_authenticated/home': typeof AuthenticatedHomeRoute
+  '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/practice': typeof AuthenticatedPracticeRoute
+  '/_authenticated/progress': typeof AuthenticatedProgressRoute
+  '/_authenticated/tutors': typeof AuthenticatedTutorsRoute
+  '/_authenticated/session/$tutorId': typeof AuthenticatedSessionTutorIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -103,22 +110,18 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/home'
-    | '/onboarding'
-    | '/practice'
-    | '/progress'
-    | '/tutors'
-    | '/session/$tutorId'
+    | '/_authenticated'
+    | '/_authenticated/home'
+    | '/_authenticated/onboarding'
+    | '/_authenticated/practice'
+    | '/_authenticated/progress'
+    | '/_authenticated/tutors'
+    | '/_authenticated/session/$tutorId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  HomeRoute: typeof HomeRoute
-  OnboardingRoute: typeof OnboardingRoute
-  PracticeRoute: typeof PracticeRoute
-  ProgressRoute: typeof ProgressRoute
-  TutorsRoute: typeof TutorsRoute
-  SessionTutorIdRoute: typeof SessionTutorIdRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -130,59 +133,82 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/home': {
-      id: '/home'
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/home': {
+      id: '/_authenticated/home'
       path: '/home'
       fullPath: '/home'
-      preLoaderRoute: typeof HomeRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedHomeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/onboarding': {
-      id: '/onboarding'
+    '/_authenticated/onboarding': {
+      id: '/_authenticated/onboarding'
       path: '/onboarding'
       fullPath: '/onboarding'
-      preLoaderRoute: typeof OnboardingRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/practice': {
-      id: '/practice'
+    '/_authenticated/practice': {
+      id: '/_authenticated/practice'
       path: '/practice'
       fullPath: '/practice'
-      preLoaderRoute: typeof PracticeRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedPracticeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/progress': {
-      id: '/progress'
+    '/_authenticated/progress': {
+      id: '/_authenticated/progress'
       path: '/progress'
       fullPath: '/progress'
-      preLoaderRoute: typeof ProgressRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedProgressRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/tutors': {
-      id: '/tutors'
+    '/_authenticated/tutors': {
+      id: '/_authenticated/tutors'
       path: '/tutors'
       fullPath: '/tutors'
-      preLoaderRoute: typeof TutorsRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedTutorsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/session/$tutorId': {
-      id: '/session/$tutorId'
+    '/_authenticated/session/$tutorId': {
+      id: '/_authenticated/session/$tutorId'
       path: '/session/$tutorId'
       fullPath: '/session/$tutorId'
-      preLoaderRoute: typeof SessionTutorIdRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedSessionTutorIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
+  AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
+  AuthenticatedPracticeRoute: typeof AuthenticatedPracticeRoute
+  AuthenticatedProgressRoute: typeof AuthenticatedProgressRoute
+  AuthenticatedTutorsRoute: typeof AuthenticatedTutorsRoute
+  AuthenticatedSessionTutorIdRoute: typeof AuthenticatedSessionTutorIdRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedHomeRoute: AuthenticatedHomeRoute,
+  AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
+  AuthenticatedPracticeRoute: AuthenticatedPracticeRoute,
+  AuthenticatedProgressRoute: AuthenticatedProgressRoute,
+  AuthenticatedTutorsRoute: AuthenticatedTutorsRoute,
+  AuthenticatedSessionTutorIdRoute: AuthenticatedSessionTutorIdRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  HomeRoute: HomeRoute,
-  OnboardingRoute: OnboardingRoute,
-  PracticeRoute: PracticeRoute,
-  ProgressRoute: ProgressRoute,
-  TutorsRoute: TutorsRoute,
-  SessionTutorIdRoute: SessionTutorIdRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
