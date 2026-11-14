@@ -14,16 +14,413 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      mistakes: {
+        Row: {
+          category: string
+          corrected: string
+          created_at: string
+          explanation: string
+          id: string
+          original: string
+          session_id: string | null
+          user_id: string
+        }
+        Insert: {
+          category: string
+          corrected: string
+          created_at?: string
+          explanation?: string
+          id?: string
+          original: string
+          session_id?: string | null
+          user_id?: string
+        }
+        Update: {
+          category?: string
+          corrected?: string
+          created_at?: string
+          explanation?: string
+          id?: string
+          original?: string
+          session_id?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      practice_sessions: {
+        Row: {
+          analytics: Json | null
+          corrections: number
+          created_at: string
+          duration_sec: number
+          feedback: Json
+          id: string
+          learner_turns: number
+          mode: string
+          recap: Json | null
+          scenario_id: string
+          started_at: string
+          transcript: Json
+          tutor_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          analytics?: Json | null
+          corrections?: number
+          created_at?: string
+          duration_sec?: number
+          feedback?: Json
+          id: string
+          learner_turns?: number
+          mode?: string
+          recap?: Json | null
+          scenario_id: string
+          started_at: string
+          transcript?: Json
+          tutor_id: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          analytics?: Json | null
+          corrections?: number
+          created_at?: string
+          duration_sec?: number
+          feedback?: Json
+          id?: string
+          learner_turns?: number
+          mode?: string
+          recap?: Json | null
+          scenario_id?: string
+          started_at?: string
+          transcript?: Json
+          tutor_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          confidence: number | null
+          created_at: string
+          display_name: string
+          goal: string | null
+          id: string
+          level: string | null
+          native_language: string | null
+          onboarded_at: string | null
+          placement_score: number | null
+          tutor_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          confidence?: number | null
+          created_at?: string
+          display_name?: string
+          goal?: string | null
+          id: string
+          level?: string | null
+          native_language?: string | null
+          onboarded_at?: string | null
+          placement_score?: number | null
+          tutor_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          confidence?: number | null
+          created_at?: string
+          display_name?: string
+          goal?: string | null
+          id?: string
+          level?: string | null
+          native_language?: string | null
+          onboarded_at?: string | null
+          placement_score?: number | null
+          tutor_id?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      studies: {
+        Row: {
+          consent_text: string
+          created_at: string
+          design: string
+          id: string
+          info_text: string
+          measures: Json
+          objective: string
+          owner_id: string
+          practice_minutes: number
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          consent_text?: string
+          created_at?: string
+          design?: string
+          id?: string
+          info_text?: string
+          measures?: Json
+          objective?: string
+          owner_id?: string
+          practice_minutes?: number
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          consent_text?: string
+          created_at?: string
+          design?: string
+          id?: string
+          info_text?: string
+          measures?: Json
+          objective?: string
+          owner_id?: string
+          practice_minutes?: number
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      study_measurements: {
+        Row: {
+          condition: string
+          created_at: string
+          id: string
+          metrics: Json
+          participant_id: string
+          phase: string
+          study_id: string
+          task_id: string
+          transcript: string | null
+        }
+        Insert: {
+          condition: string
+          created_at?: string
+          id?: string
+          metrics?: Json
+          participant_id: string
+          phase: string
+          study_id: string
+          task_id: string
+          transcript?: string | null
+        }
+        Update: {
+          condition?: string
+          created_at?: string
+          id?: string
+          metrics?: Json
+          participant_id?: string
+          phase?: string
+          study_id?: string
+          task_id?: string
+          transcript?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "study_measurements_participant_id_fkey"
+            columns: ["participant_id"]
+            isOneToOne: false
+            referencedRelation: "study_participants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "study_measurements_study_id_fkey"
+            columns: ["study_id"]
+            isOneToOne: false
+            referencedRelation: "studies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      study_participants: {
+        Row: {
+          assigned_condition: string | null
+          code: string
+          condition_order: string | null
+          consent_text_snapshot: string | null
+          consented_at: string | null
+          created_at: string
+          id: string
+          level: string | null
+          native_language: string | null
+          study_id: string
+          withdrawn_at: string | null
+        }
+        Insert: {
+          assigned_condition?: string | null
+          code: string
+          condition_order?: string | null
+          consent_text_snapshot?: string | null
+          consented_at?: string | null
+          created_at?: string
+          id?: string
+          level?: string | null
+          native_language?: string | null
+          study_id: string
+          withdrawn_at?: string | null
+        }
+        Update: {
+          assigned_condition?: string | null
+          code?: string
+          condition_order?: string | null
+          consent_text_snapshot?: string | null
+          consented_at?: string | null
+          created_at?: string
+          id?: string
+          level?: string | null
+          native_language?: string | null
+          study_id?: string
+          withdrawn_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "study_participants_study_id_fkey"
+            columns: ["study_id"]
+            isOneToOne: false
+            referencedRelation: "studies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      study_practice_logs: {
+        Row: {
+          condition: string
+          created_at: string
+          details: Json
+          duration_sec: number
+          id: string
+          participant_id: string
+          study_id: string
+        }
+        Insert: {
+          condition: string
+          created_at?: string
+          details?: Json
+          duration_sec?: number
+          id?: string
+          participant_id: string
+          study_id: string
+        }
+        Update: {
+          condition?: string
+          created_at?: string
+          details?: Json
+          duration_sec?: number
+          id?: string
+          participant_id?: string
+          study_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "study_practice_logs_participant_id_fkey"
+            columns: ["participant_id"]
+            isOneToOne: false
+            referencedRelation: "study_participants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "study_practice_logs_study_id_fkey"
+            columns: ["study_id"]
+            isOneToOne: false
+            referencedRelation: "studies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      study_surveys: {
+        Row: {
+          comments: string | null
+          condition: string
+          created_at: string
+          id: string
+          participant_id: string
+          phase: string
+          responses: Json
+          study_id: string
+        }
+        Insert: {
+          comments?: string | null
+          condition: string
+          created_at?: string
+          id?: string
+          participant_id: string
+          phase: string
+          responses?: Json
+          study_id: string
+        }
+        Update: {
+          comments?: string | null
+          condition?: string
+          created_at?: string
+          id?: string
+          participant_id?: string
+          phase?: string
+          responses?: Json
+          study_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "study_surveys_participant_id_fkey"
+            columns: ["participant_id"]
+            isOneToOne: false
+            referencedRelation: "study_participants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "study_surveys_study_id_fkey"
+            columns: ["study_id"]
+            isOneToOne: false
+            referencedRelation: "studies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      claim_first_researcher: { Args: never; Returns: boolean }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      owns_study: { Args: { _study_id: string }; Returns: boolean }
+      researcher_exists: { Args: never; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "researcher" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +547,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["researcher", "admin"],
+    },
   },
 } as const
