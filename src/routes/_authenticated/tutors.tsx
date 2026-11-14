@@ -8,7 +8,7 @@ import { TUTOR_PORTRAITS } from "@/lib/tutor-media";
 import { TUTORS } from "@/lib/tutors";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/tutors")({
+export const Route = createFileRoute("/_authenticated/tutors")({
   head: () => ({
     meta: [
       { title: "Choose your tutor — ENE" },

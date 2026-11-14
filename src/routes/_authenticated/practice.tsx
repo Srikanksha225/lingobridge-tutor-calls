@@ -15,7 +15,7 @@ import { SCENARIOS } from "@/lib/scenarios";
 import { TUTOR_PORTRAITS } from "@/lib/tutor-media";
 import { getTutor } from "@/lib/tutors";
 
-export const Route = createFileRoute("/practice")({
+export const Route = createFileRoute("/_authenticated/practice")({
   head: () => ({
     meta: [
       { title: "Practice — ENE" },

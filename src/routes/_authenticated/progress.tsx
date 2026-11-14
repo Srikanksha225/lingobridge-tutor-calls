@@ -14,7 +14,7 @@ import { TUTOR_PORTRAITS } from "@/lib/tutor-media";
 import { getTutor } from "@/lib/tutors";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/progress")({
+export const Route = createFileRoute("/_authenticated/progress")({
   head: () => ({
     meta: [
       { title: "Progress — ENE" },

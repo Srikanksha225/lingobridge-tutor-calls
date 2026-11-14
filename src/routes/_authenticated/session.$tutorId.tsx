@@ -45,7 +45,7 @@ import { TUTOR_PORTRAITS } from "@/lib/tutor-media";
 import { getTutor, type Tutor } from "@/lib/tutors";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/session/$tutorId")({
+export const Route = createFileRoute("/_authenticated/session/$tutorId")({
   validateSearch: (search: Record<string, unknown>): { scenario: ScenarioId } => ({
     scenario: (SCENARIO_IDS as readonly string[]).includes(String(search["scenario"]))
       ? (search["scenario"] as ScenarioId)

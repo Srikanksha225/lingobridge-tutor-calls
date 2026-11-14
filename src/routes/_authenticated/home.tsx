@@ -10,7 +10,7 @@ import { getScenario, SCENARIOS } from "@/lib/scenarios";
 import { TUTOR_PORTRAITS } from "@/lib/tutor-media";
 import { getTutor } from "@/lib/tutors";
 
-export const Route = createFileRoute("/home")({
+export const Route = createFileRoute("/_authenticated/home")({
   head: () => ({
     meta: [
       { title: "Home — ENE" },

@@ -21,7 +21,7 @@ import { TUTOR_PORTRAITS } from "@/lib/tutor-media";
 import { TUTORS, type TutorId } from "@/lib/tutors";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/onboarding")({
+export const Route = createFileRoute("/_authenticated/onboarding")({
   head: () => ({
     meta: [
       { title: "Get started — ENE" },
