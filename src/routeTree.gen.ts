@@ -10,76 +10,77 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as HomeRouteImport } from './routes/home'
-import { Route as OnboardingRouteImport } from './routes/onboarding'
-import { Route as PracticeRouteImport } from './routes/practice'
-import { Route as ProgressRouteImport } from './routes/progress'
-import { Route as TutorsRouteImport } from './routes/tutors'
-import { Route as SessionTutorIdRouteImport } from './routes/session.$tutorId'
+import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
+import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedPracticeRouteImport } from './routes/_authenticated/practice'
+import { Route as AuthenticatedProgressRouteImport } from './routes/_authenticated/progress'
+import { Route as AuthenticatedTutorsRouteImport } from './routes/_authenticated/tutors'
+import { Route as AuthenticatedSessionTutorIdRouteImport } from './routes/_authenticated/session.$tutorId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const HomeRoute = HomeRouteImport.update({
-  id: '/home',
+const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
+  id: '/_authenticated/home',
   path: '/home',
   getParentRoute: () => rootRouteImport,
 } as any)
-const OnboardingRoute = OnboardingRouteImport.update({
-  id: '/onboarding',
+const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
+  id: '/_authenticated/onboarding',
   path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PracticeRoute = PracticeRouteImport.update({
-  id: '/practice',
+const AuthenticatedPracticeRoute = AuthenticatedPracticeRouteImport.update({
+  id: '/_authenticated/practice',
   path: '/practice',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProgressRoute = ProgressRouteImport.update({
-  id: '/progress',
+const AuthenticatedProgressRoute = AuthenticatedProgressRouteImport.update({
+  id: '/_authenticated/progress',
   path: '/progress',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TutorsRoute = TutorsRouteImport.update({
-  id: '/tutors',
+const AuthenticatedTutorsRoute = AuthenticatedTutorsRouteImport.update({
+  id: '/_authenticated/tutors',
   path: '/tutors',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SessionTutorIdRoute = SessionTutorIdRouteImport.update({
-  id: '/session/$tutorId',
-  path: '/session/$tutorId',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const AuthenticatedSessionTutorIdRoute =
+  AuthenticatedSessionTutorIdRouteImport.update({
+    id: '/_authenticated/session/$tutorId',
+    path: '/session/$tutorId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/home': typeof HomeRoute
-  '/onboarding': typeof OnboardingRoute
-  '/practice': typeof PracticeRoute
-  '/progress': typeof ProgressRoute
-  '/tutors': typeof TutorsRoute
-  '/session/$tutorId': typeof SessionTutorIdRoute
+  '/home': typeof AuthenticatedHomeRoute
+  '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/practice': typeof AuthenticatedPracticeRoute
+  '/progress': typeof AuthenticatedProgressRoute
+  '/tutors': typeof AuthenticatedTutorsRoute
+  '/session/$tutorId': typeof AuthenticatedSessionTutorIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/home': typeof HomeRoute
-  '/onboarding': typeof OnboardingRoute
-  '/practice': typeof PracticeRoute
-  '/progress': typeof ProgressRoute
-  '/tutors': typeof TutorsRoute
-  '/session/$tutorId': typeof SessionTutorIdRoute
+  '/home': typeof AuthenticatedHomeRoute
+  '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/practice': typeof AuthenticatedPracticeRoute
+  '/progress': typeof AuthenticatedProgressRoute
+  '/tutors': typeof AuthenticatedTutorsRoute
+  '/session/$tutorId': typeof AuthenticatedSessionTutorIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/home': typeof HomeRoute
-  '/onboarding': typeof OnboardingRoute
-  '/practice': typeof PracticeRoute
-  '/progress': typeof ProgressRoute
-  '/tutors': typeof TutorsRoute
-  '/session/$tutorId': typeof SessionTutorIdRoute
+  '/_authenticated/home': typeof AuthenticatedHomeRoute
+  '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/practice': typeof AuthenticatedPracticeRoute
+  '/_authenticated/progress': typeof AuthenticatedProgressRoute
+  '/_authenticated/tutors': typeof AuthenticatedTutorsRoute
+  '/_authenticated/session/$tutorId': typeof AuthenticatedSessionTutorIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -103,22 +104,22 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/home'
-    | '/onboarding'
-    | '/practice'
-    | '/progress'
-    | '/tutors'
-    | '/session/$tutorId'
+    | '/_authenticated/home'
+    | '/_authenticated/onboarding'
+    | '/_authenticated/practice'
+    | '/_authenticated/progress'
+    | '/_authenticated/tutors'
+    | '/_authenticated/session/$tutorId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  HomeRoute: typeof HomeRoute
-  OnboardingRoute: typeof OnboardingRoute
-  PracticeRoute: typeof PracticeRoute
-  ProgressRoute: typeof ProgressRoute
-  TutorsRoute: typeof TutorsRoute
-  SessionTutorIdRoute: typeof SessionTutorIdRoute
+  AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
+  AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
+  AuthenticatedPracticeRoute: typeof AuthenticatedPracticeRoute
+  AuthenticatedProgressRoute: typeof AuthenticatedProgressRoute
+  AuthenticatedTutorsRoute: typeof AuthenticatedTutorsRoute
+  AuthenticatedSessionTutorIdRoute: typeof AuthenticatedSessionTutorIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -130,46 +131,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/home': {
-      id: '/home'
+    '/_authenticated/home': {
+      id: '/_authenticated/home'
       path: '/home'
       fullPath: '/home'
-      preLoaderRoute: typeof HomeRouteImport
+      preLoaderRoute: typeof AuthenticatedHomeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/onboarding': {
-      id: '/onboarding'
+    '/_authenticated/onboarding': {
+      id: '/_authenticated/onboarding'
       path: '/onboarding'
       fullPath: '/onboarding'
-      preLoaderRoute: typeof OnboardingRouteImport
+      preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/practice': {
-      id: '/practice'
+    '/_authenticated/practice': {
+      id: '/_authenticated/practice'
       path: '/practice'
       fullPath: '/practice'
-      preLoaderRoute: typeof PracticeRouteImport
+      preLoaderRoute: typeof AuthenticatedPracticeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/progress': {
-      id: '/progress'
+    '/_authenticated/progress': {
+      id: '/_authenticated/progress'
       path: '/progress'
       fullPath: '/progress'
-      preLoaderRoute: typeof ProgressRouteImport
+      preLoaderRoute: typeof AuthenticatedProgressRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/tutors': {
-      id: '/tutors'
+    '/_authenticated/tutors': {
+      id: '/_authenticated/tutors'
       path: '/tutors'
       fullPath: '/tutors'
-      preLoaderRoute: typeof TutorsRouteImport
+      preLoaderRoute: typeof AuthenticatedTutorsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/session/$tutorId': {
-      id: '/session/$tutorId'
+    '/_authenticated/session/$tutorId': {
+      id: '/_authenticated/session/$tutorId'
       path: '/session/$tutorId'
       fullPath: '/session/$tutorId'
-      preLoaderRoute: typeof SessionTutorIdRouteImport
+      preLoaderRoute: typeof AuthenticatedSessionTutorIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -177,12 +178,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  HomeRoute: HomeRoute,
-  OnboardingRoute: OnboardingRoute,
-  PracticeRoute: PracticeRoute,
-  ProgressRoute: ProgressRoute,
-  TutorsRoute: TutorsRoute,
-  SessionTutorIdRoute: SessionTutorIdRoute,
+  AuthenticatedHomeRoute: AuthenticatedHomeRoute,
+  AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
+  AuthenticatedPracticeRoute: AuthenticatedPracticeRoute,
+  AuthenticatedProgressRoute: AuthenticatedProgressRoute,
+  AuthenticatedTutorsRoute: AuthenticatedTutorsRoute,
+  AuthenticatedSessionTutorIdRoute: AuthenticatedSessionTutorIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
